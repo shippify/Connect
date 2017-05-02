@@ -19,6 +19,7 @@ import SDWebImage
 import Whisper
 import RealmSwift
 import UserNotifications
+import FontAwesome_swift
 
 /**
  *  ViewController that lists your conversations
@@ -41,8 +42,15 @@ class ConversationsListViewController: UITableViewController {
   let readDove = UIImage(named: "check-blue-icon.png")
   let sentDove = UIImage(named: "check-grey-icon.png")
   
+  
   let appID = ""
   let appSecret = ""
+  
+  var appIDv: String!
+  var appSecretv: String!
+  
+  var name:String! = ""
+  var monkeyId:String! = ""
   
   let dateFormatter = DateFormatter()
   
@@ -58,9 +66,16 @@ class ConversationsListViewController: UITableViewController {
      */
     self.tableView.tableFooterView = UIView()
     
+    // MENU IMAGE
+    let barImage = UIImage.fontAwesomeIcon(name: .bars, textColor: .blue, size: CGSize(width: 20, height: 20))
+    
+    // VIEW - Menu Bar Button Item
+    let menu = UIBarButtonItem(image: barImage, style: .plain, target: self, action: nil)
+    
     // VIEW - navigation bar
     self.navigationItem.title = "Chat"
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+    self.navigationItem.leftBarButtonItem = menu
     
     //customize In-app
     ColorList.Shout.background = UIColor.black
@@ -93,9 +108,9 @@ class ConversationsListViewController: UITableViewController {
     self.tableView.register(UINib(nibName: "ChatViewCell", bundle: nil), forCellReuseIdentifier: "ChatViewCell")
     
     //configure refresh control
-    self.refreshControl = UIRefreshControl()
-    self.refreshControl?.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
-    self.refreshControl?.addTarget(self, action: #selector(ConversationsListViewController.handleTableRefresh), for: .valueChanged)
+//    self.refreshControl = UIRefreshControl()
+//    self.refreshControl?.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
+//    self.refreshControl?.addTarget(self, action: #selector(ConversationsListViewController.handleTableRefresh), for: .valueChanged)
     
     // screen info whr conversation list is empty
     let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
@@ -111,6 +126,8 @@ class ConversationsListViewController: UITableViewController {
     
     //register listener for changes in the socket connection
     NotificationCenter.default.addObserver(self, selector: #selector(self.handleConnectionChange), name: NSNotification.Name.MonkeySocketStatusChange, object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(self.blockForhandleConnectionChange), name: NSNotification.Name.MonkeySocketStatusChange, object: nil)
     
     //register listener for incoming messages
     NotificationCenter.default.addObserver(self, selector: #selector(self.messageReceived(_:)), name: NSNotification.Name.MonkeyMessage, object: nil)
@@ -154,8 +171,8 @@ class ConversationsListViewController: UITableViewController {
      *  Initialize Monkey
      */
     
-    let user = ["name":"",
-                "monkeyId": ""]
+    let user = ["name": self.name,
+                "monkeyId": self.monkeyId]
     
     let ignoredParams = ["password"]
     
@@ -183,12 +200,12 @@ class ConversationsListViewController: UITableViewController {
                                           }
                                           UIApplication.shared.registerForRemoteNotifications()
                                           
-                                      
+                                          
                                           //
                                           if self.conversationArray.count == 0 {
                                             self.getConversations(0)
                                           }
-      },
+    },
                                         failure: {(task, error) in
                                           print(error.localizedDescription)
     })
@@ -226,85 +243,85 @@ class ConversationsListViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    var conversation:MOKConversation!
-    if self.searchController.isActive {
-      conversation = self.filteredConversationArray[indexPath.row]
-    }else{
-      conversation = self.conversationArray[indexPath.row]
-    }
-    let cell = tableView.dequeueReusableCell(withIdentifier: "ChatViewCell", for: indexPath) as! ChatViewCell
-    
-    //set highlighted state
-    cell.nameLabel.highlightedTextColor = UIColor.black
-    cell.dateLabel.highlightedTextColor = UIColor.gray
-    cell.previewLabel.highlightedTextColor = UIColor.gray
-    
-    //set initial state of cell
-    cell.previewLabel.isHidden = false
-    cell.previewLabel.textColor = UIColor(red: 142.0/255, green: 142.0/255, blue: 147.0/255, alpha: 1)
-    cell.previewLabel.highlightedTextColor = UIColor(red: 142.0/255, green: 142.0/255, blue: 147.0/255, alpha: 1)
-    
-    cell.dateLabel.isHidden = false
-    cell.dateLabel.textColor = UIColor(red: 142.0/255, green: 142.0/255, blue: 147.0/255, alpha: 1)
-    cell.dateLabel.highlightedTextColor = UIColor(red: 142.0/255, green: 142.0/255, blue: 147.0/255, alpha: 1)
-    
-    cell.moreImageView.isHidden = false
-    cell.badgeContainerView.isHidden = true
-    cell.doveImageView.image = nil
-    cell.previewOffsetConstraint.constant = 0
-    cell.badgeWidthConstraint.constant = 20
-    
-    //setting current values
-    
-    cell.nameLabel.text = conversation.info.object(forKey: "name") as? String ?? "Unknown"
-    cell.avatarImageView.sd_setImage(with: conversation.getAvatarURL(), placeholderImage: self.defaultAvatar)
-    
-    if conversation.unread > 0 {
-      cell.badgeContainerView.isHidden = false
-      cell.dateLabel.textColor = UIColor(red: 0.0/255, green: 122.0/255, blue: 255.0/255, alpha: 1)
-      cell.dateLabel.highlightedTextColor = UIColor(red: 0.0/255, green: 122.0/255, blue: 255.0/255, alpha: 1)
-      cell.badgeLabel.text = String(conversation.unread)
+      var conversation:MOKConversation!
+      if self.searchController.isActive {
+        conversation = self.filteredConversationArray[indexPath.row]
+      }else{
+        conversation = self.conversationArray[indexPath.row]
+      }
+      let cell = tableView.dequeueReusableCell(withIdentifier: "ChatViewCell", for: indexPath) as! ChatViewCell
       
-      if conversation.unread > 9 {
-        cell.badgeWidthConstraint.constant = 25
+      //set highlighted state
+      cell.nameLabel.highlightedTextColor = UIColor.black
+      cell.dateLabel.highlightedTextColor = UIColor.gray
+      cell.previewLabel.highlightedTextColor = UIColor.gray
+      
+      //set initial state of cell
+      cell.previewLabel.isHidden = false
+      cell.previewLabel.textColor = UIColor(red: 142.0/255, green: 142.0/255, blue: 147.0/255, alpha: 1)
+      cell.previewLabel.highlightedTextColor = UIColor(red: 142.0/255, green: 142.0/255, blue: 147.0/255, alpha: 1)
+      
+      cell.dateLabel.isHidden = false
+      cell.dateLabel.textColor = UIColor(red: 142.0/255, green: 142.0/255, blue: 147.0/255, alpha: 1)
+      cell.dateLabel.highlightedTextColor = UIColor(red: 142.0/255, green: 142.0/255, blue: 147.0/255, alpha: 1)
+      
+      cell.moreImageView.isHidden = false
+      cell.badgeContainerView.isHidden = true
+      cell.doveImageView.image = nil
+      cell.previewOffsetConstraint.constant = 0
+      cell.badgeWidthConstraint.constant = 20
+      
+      //setting current values
+      
+      cell.nameLabel.text = conversation.info.object(forKey: "name") as? String ?? "Unknown"
+      cell.avatarImageView.sd_setImage(with: conversation.getAvatarURL(), placeholderImage: self.defaultAvatar)
+      
+      if conversation.unread > 0 {
+        cell.badgeContainerView.isHidden = false
+        cell.dateLabel.textColor = UIColor(red: 0.0/255, green: 122.0/255, blue: 255.0/255, alpha: 1)
+        cell.dateLabel.highlightedTextColor = UIColor(red: 0.0/255, green: 122.0/255, blue: 255.0/255, alpha: 1)
+        cell.badgeLabel.text = String(conversation.unread)
+        
+        if conversation.unread > 9 {
+          cell.badgeWidthConstraint.constant = 25
+        }
+        
+        if conversation.unread > 99 {
+          cell.badgeWidthConstraint.constant = 30
+        }
       }
       
-      if conversation.unread > 99 {
-        cell.badgeWidthConstraint.constant = 30
+      guard let lastMessage = conversation.lastMessage else {
+        cell.dateLabel.text = ""
+        cell.moreImageView.isHidden = true
+        cell.previewLabel.text = conversation.isGroup() ? "Write to this Group" : "Write to this Contact"
+        
+        return cell
       }
-    }
-    
-    guard let lastMessage = conversation.lastMessage else {
-      cell.dateLabel.text = ""
-      cell.moreImageView.isHidden = true
-      cell.previewLabel.text = conversation.isGroup() ? "Write to this Group" : "Write to this Contact"
+      
+      cell.dateLabel.text = lastMessage.relativeDate()
+      
+      var previewText = lastMessage.preview()
+      
+      //message is outgoing
+      if Monkey.sharedInstance().isMessageOutgoing(lastMessage) {
+        if lastMessage.wasSent() {
+          cell.previewOffsetConstraint.constant = 18
+          cell.doveImageView.image = self.sentDove
+        } else {
+          previewText = "Sending: \(previewText)"
+        }
+      }
+      
+      if lastMessage.needsResend() {
+        previewText = "Failed to send"
+        cell.previewLabel.textColor = UIColor.red
+        cell.previewLabel.highlightedTextColor = UIColor.red
+      }
+      
+      cell.previewLabel.text = previewText
       
       return cell
-    }
-    
-    cell.dateLabel.text = lastMessage.relativeDate()
-    
-    var previewText = lastMessage.preview()
-    
-    //message is outgoing
-    if Monkey.sharedInstance().isMessageOutgoing(lastMessage) {
-      if lastMessage.wasSent() {
-        cell.previewOffsetConstraint.constant = 18
-        cell.doveImageView.image = self.sentDove
-      } else {
-        previewText = "Sending: \(previewText)"
-      }
-    }
-    
-    if lastMessage.needsResend() {
-      previewText = "Failed to send"
-      cell.previewLabel.textColor = UIColor.red
-      cell.previewLabel.highlightedTextColor = UIColor.red
-    }
-    
-    cell.previewLabel.text = previewText
-    
-    return cell
   }
   
   //MARK: TableView Delegate
@@ -387,13 +404,13 @@ class ConversationsListViewController: UITableViewController {
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .none)
             tableView.endUpdates()
-            }, failure: { (task, error) in
-              let errorAlert = UIAlertController(title: "There was an error deleting the conversations, please try again later", message: nil, preferredStyle: .alert)
-              let okButton = UIAlertAction(title: "Ok", style: .default, handler: nil)
-              
-              errorAlert.addAction(okButton)
-              
-              self.present(errorAlert, animated: true, completion: nil)
+          }, failure: { (task, error) in
+            let errorAlert = UIAlertController(title: "There was an error deleting the conversations, please try again later", message: nil, preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            
+            errorAlert.addAction(okButton)
+            
+            self.present(errorAlert, animated: true, completion: nil)
           })
           
         }))
@@ -407,13 +424,13 @@ class ConversationsListViewController: UITableViewController {
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .none)
             tableView.endUpdates()
-            }, failure: { (data, error) in
-              let errorAlert = UIAlertController(title: "There was an error deleting the conversations, please try again later", message: nil, preferredStyle: .alert)
-              let okButton = UIAlertAction(title: "Ok", style: .default, handler: nil)
-              
-              errorAlert.addAction(okButton)
-              
-              self.present(errorAlert, animated: true, completion: nil)
+          }, failure: { (data, error) in
+            let errorAlert = UIAlertController(title: "There was an error deleting the conversations, please try again later", message: nil, preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            
+            errorAlert.addAction(okButton)
+            
+            self.present(errorAlert, animated: true, completion: nil)
           })
         }))
       }
@@ -561,6 +578,30 @@ extension ConversationsListViewController {
       Whisper.show(shout: announcement, to: self.navigationController!)
     }
   }
+  
+  func blockForhandleConnectionChange(_ notification: Foundation.Notification){
+    //handle connection changes
+    switch ((notification as NSNotification).userInfo!["status"] as! NSNumber).uint32Value{
+    case MOKConnectionStateDisconnected.rawValue, MOKConnectionStateConnecting.rawValue, MOKConnectionStateNoNetwork.rawValue:
+      
+      print("disconnected")
+      print("connecting")
+      print("no network")
+      tableView.isUserInteractionEnabled = false
+      tableView.isScrollEnabled = false
+      
+      break
+    case MOKConnectionStateConnected.rawValue:
+      
+      print("connected")
+      tableView.isUserInteractionEnabled = true
+      tableView.isScrollEnabled = true
+      
+      break
+    default:
+      fatalError()
+    }
+  }
 }
 
 //MARK: Monkey socket messages
@@ -597,7 +638,8 @@ extension ConversationsListViewController {
       }
     }
     
-    guard conversation != nil else { //create conversation if it doesn't exist
+    if (!conversationArray.contains(where: { $0.conversationId == conversationId }) && conversationHash[conversationId] == nil) { //create conversation if it doesn't exist
+      print("creating Conversation - conversationID: \(conversationId)")
       createConversation(conversationId, message: message)
       return
     }
@@ -606,8 +648,6 @@ extension ConversationsListViewController {
     if !Monkey.sharedInstance().isMessageOutgoing(message) {
       conversation!.unread += 1
       
-      //Show In-app notification
-      showInAppNotification(conversation?.info["name"] as! String? , avatarUrl: (conversation?.getAvatarURL())!, description: message.preview())
     }
     
     DBManager.store(conversation!)
@@ -631,11 +671,11 @@ extension ConversationsListViewController {
       Monkey.sharedInstance().getPendingMessages()
       return
     }
-
+    
     // get message to update id
     guard let conversation = self.conversationHash[acknowledge["conversationId"] as! String] else {
-        //nothing to do
-        return
+      //nothing to do
+      return
     }
     
     //update local message
@@ -643,7 +683,7 @@ extension ConversationsListViewController {
     
     
     guard let lastMessage = conversation.lastMessage, lastMessage.messageId == oldId else {
-        return
+      return
     }
     lastMessage.messageId = newId
     lastMessage.oldMessageId = oldId
@@ -664,7 +704,7 @@ extension ConversationsListViewController {
   
   func openReceived(_ notification:Foundation.Notification){
     guard let message = (notification as NSNotification).userInfo!["message"] else{
-        return
+      return
     }
     
     print(message)
@@ -672,7 +712,7 @@ extension ConversationsListViewController {
   
   func openResponseReceived(_ notification:Foundation.Notification){
     guard let message = (notification as NSNotification).userInfo!["message"] else{
-        return
+      return
     }
     
     print(message)
@@ -680,7 +720,7 @@ extension ConversationsListViewController {
   
   func createGroup(_ notification:Foundation.Notification){
     guard let message = (notification as NSNotification).userInfo!["message"] else{
-        return
+      return
     }
     
     print(message)
@@ -688,7 +728,7 @@ extension ConversationsListViewController {
   
   func addMember(_ notification:Foundation.Notification){
     guard let message = (notification as NSNotification).userInfo!["message"] else{
-        return
+      return
     }
     
     print(message)
@@ -696,7 +736,7 @@ extension ConversationsListViewController {
   
   func removeMember(_ notification:Foundation.Notification){
     guard let message = (notification as NSNotification).userInfo!["message"] else{
-        return
+      return
     }
     
     print(message)
@@ -704,7 +744,7 @@ extension ConversationsListViewController {
   
   func groupList(_ notification:Foundation.Notification){
     guard let message = (notification as NSNotification).userInfo!["message"] else{
-        return
+      return
     }
     
     print(message)
@@ -713,7 +753,7 @@ extension ConversationsListViewController {
 
 //MARK: MonkeyChat
 extension ConversationsListViewController {
-
+  
   // Conversation
   func getConversations(_ from:Double) {
     
@@ -770,8 +810,8 @@ extension ConversationsListViewController {
       if !unknownUsers.isEmpty {
         Monkey.sharedInstance().getInfoByIds(unknownUsers, success: { (users) in
           DBManager.store(users)
-          }, failure: { (task, error) in
-            print(error)
+        }, failure: { (task, error) in
+          print(error)
         })
       }
       
@@ -782,10 +822,10 @@ extension ConversationsListViewController {
       self.isGettingConversations = false
       
       self.refreshControl?.endRefreshing()
-      }, failure: { (task, error) in
-        self.isGettingConversations = false
-        self.refreshControl?.endRefreshing()
-        print(error)
+    }, failure: { (task, error) in
+      self.isGettingConversations = false
+      self.refreshControl?.endRefreshing()
+      print(error)
     })
   }
   
@@ -808,8 +848,8 @@ extension ConversationsListViewController {
           if !unknownUsers.isEmpty {
             Monkey.sharedInstance().getInfoByIds(unknownUsers, success: { (users) in
               DBManager.store(users)
-              }, failure: { (task, error) in
-                print(error)
+            }, failure: { (task, error) in
+              print(error)
             })
           }
         }
@@ -832,8 +872,8 @@ extension ConversationsListViewController {
         
         self.updateConversationList()
         
-        }, failure: { (task, error) in
-          print(error)
+      }, failure: { (task, error) in
+        print(error)
       })
       return
     }
@@ -857,24 +897,24 @@ extension ConversationsListViewController {
     
     self.updateConversationList()
   }
- 
+  
   func sortConversations() {
     self.conversationArray.sort { (conv1, conv2) -> Bool in
       
       let time1 = conv1.lastMessage?.timestampCreated ?? conv1.lastModified
       let time2 = conv2.lastMessage?.timestampCreated ?? conv2.lastModified
-
+      
       return time1 > time2
     }
   }
   
-  func handleTableRefresh(){
-    self.conversationArray = []
-    self.conversationHash = [:]
-    self.tableView.reloadData()
-    DBManager.deleteAll()
-    self.getConversations(0)
-  }
+//  func handleTableRefresh(){
+//    self.conversationArray = []
+//    self.conversationHash = [:]
+//    self.tableView.reloadData()
+//    DBManager.deleteAll()
+//    self.getConversations(0)
+//  }
 }
 
 class ChatViewCell: UITableViewCell {

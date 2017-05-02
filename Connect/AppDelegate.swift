@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+      
+      let realm = try! Realm()
+      let sessionExists = !realm.objects(Session.self).isEmpty
+      
+      let window = UIWindow(frame: UIScreen.main.bounds)
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let viewControllerIdentifier = sessionExists ? "Main" : "Start"
+      let viewController = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier)
+      window.rootViewController = viewController
+      window.makeKeyAndVisible()
+      self.window = window
+      
         return true
     }
 

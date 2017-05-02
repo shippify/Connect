@@ -38,6 +38,7 @@ class ChatViewController: MOKChatViewController, JSQMessagesComposerTextViewPast
   // DATA - conversation - messages
   var messageHash = [String:MOKMessage]()
   var messageArray = [MOKMessage]()
+  var lastReceiveHash = [String:Double]()
   
   //messageId : AFHTTPRequestOperation
   var downloadOperations = [String:AnyObject]()
@@ -45,6 +46,7 @@ class ChatViewController: MOKChatViewController, JSQMessagesComposerTextViewPast
   //flags for requesting messages
   var isGettingMessages = false
   var shouldRequestMessages = true
+  
   
   let readDove = JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(named: "check-blue-icon.png"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
   let sentDove = JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(named: "check-grey-icon.png"), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
@@ -101,6 +103,9 @@ class ChatViewController: MOKChatViewController, JSQMessagesComposerTextViewPast
     self.descriptionViewTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.showInfoConversation(_:)))
     self.descriptionViewTapRecognizer.numberOfTapsRequired = 1
     self.descriptionView.addGestureRecognizer(self.descriptionViewTapRecognizer)
+    
+    // VIEW - tabBar - hide for chat
+    self.tabBarController?.tabBar.isHidden = true
     
     // VIEW - navigation bar - right button
     self.avatarImageView.sd_setImage(with: self.conversation.getAvatarURL(), placeholderImage: UIImage(named: "Profile_imgDefault.png"))
@@ -268,6 +273,11 @@ class ChatViewController: MOKChatViewController, JSQMessagesComposerTextViewPast
     }
     
     if !self.conversation.isGroup() && self.conversation.lastRead >= message.timestampCreated {
+      return self.readDove
+    }
+    
+    // MARK:  Check for group if was reading for at least a member
+    if self.conversation.isGroup() && checkLastRead(lastReceiveHash, lastRead: message.timestampCreated) {
       return self.readDove
     }
     
@@ -736,7 +746,7 @@ extension ChatViewController: RGCircularSliderDelegate {
     try! AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
   }
   
-  func  audioDidBeginPause(_ audioSlider: Any) {
+  func audioDidBeginPause(_ audioSlider: Any) {
     UIDevice.current.isProximityMonitoringEnabled = false
     self.audioBubbleOnPlay = audioSlider as? RGCircularSlider
     try! AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
@@ -895,7 +905,21 @@ extension ChatViewController {
       
       DBManager.store(self.conversation)
       self.statusLabel.text = "Last Seen " + self.conversation.getLastSeenDate()
+    } else {
+      // MARK: Here for change lastOpenMe for group
       
+      if let lastOpenMeGroupTmp = response["lastSeen"] as? [AnyHashable:Any]? {
+        for item in lastOpenMeGroupTmp! {
+          let member = item.key as! String
+          let lastOpen = Double(item.value as! String)! as TimeInterval
+          lastReceiveHash[member] = lastOpen
+          if (lastOpen > self.conversation.lastRead) {
+            self.conversation.lastRead = lastOpen
+          }
+        }
+  
+        DBManager.store(self.conversation)
+      }
     }
   }
   
@@ -903,7 +927,7 @@ extension ChatViewController {
     guard let response = (notification as NSNotification).userInfo else {
       return
     }
-
+    print(response)
     let conversationId = response["sender"] as! String
     let timestamp = Date().timeIntervalSince1970
     if conversationId == self.conversation.conversationId {
@@ -1022,6 +1046,7 @@ extension ChatViewController {
     }
     
     let push = self.createPush(Text, fileType: nil)
+    print("textCopy: \(textCopy)")
     let message = Monkey.sharedInstance().sendText(textCopy, to: self.conversation.conversationId, params: nil, push: push)
     
     DBManager.store(message)
@@ -1032,6 +1057,7 @@ extension ChatViewController {
     JSQSystemSoundPlayer.jsq_playMessageSentSound()
     self.finishSendingMessage(animated: true)
     let remainingText = wordArray.joined(separator: " ")
+    print("remainingText: \(remainingText)")
     self.send(remainingText, size: size)
   }
   
@@ -1078,5 +1104,16 @@ extension ChatViewController {
                           "loc-args":locArgs]
                 ] as [String : Any]
     return push
+  }
+  
+  // Last Read
+  func checkLastRead(_ lastReceiveHash:[String:Double], lastRead: TimeInterval) -> Bool {
+    for item in lastReceiveHash {
+      let lastOpenForMember = item.value as TimeInterval
+      if lastOpenForMember < conversation.lastRead {
+        return false
+      }
+    }
+    return true
   }
 }

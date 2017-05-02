@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A6FDD4B1EB13E65007BC3EA /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6FDD4A1EB13E65007BC3EA /* Session.swift */; };
+		0AF202D21EAAB0B50031A9B7 /* ChatViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF202D11EAAB0B50031A9B7 /* ChatViewCell.xib */; };
 		41E88C1A1E8967ED00B9AF07 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E88C191E8967ED00B9AF07 /* InitialViewController.swift */; };
 		41E88C1C1E896A1D00B9AF07 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E88C1B1E896A1D00B9AF07 /* LoginViewController.swift */; };
 		41FEA7F81E5F084A00DF4DA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FEA7F71E5F084A00DF4DA3 /* AppDelegate.swift */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		043B527C0F777CBD65158200 /* Pods-Connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connect/Pods-Connect.debug.xcconfig"; sourceTree = "<group>"; };
+		0A6FDD4A1EB13E65007BC3EA /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		0AF202D11EAAB0B50031A9B7 /* ChatViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewCell.xib; sourceTree = "<group>"; };
 		41E88C191E8967ED00B9AF07 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		41E88C1B1E896A1D00B9AF07 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		41FEA7F41E5F084A00DF4DA3 /* Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connect.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +85,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AF202CD1EAAAF970031A9B7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0AF202CE1EAAAFA20031A9B7 /* Cells */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		0AF202CE1EAAAFA20031A9B7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0AF202D11EAAB0B50031A9B7 /* ChatViewCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		41E88C121E89639A00B9AF07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +132,7 @@
 		41FEA7F61E5F084A00DF4DA3 /* Connect */ = {
 			isa = PBXGroup;
 			children = (
+				0AF202CD1EAAAF970031A9B7 /* Views */,
 				41FEA82E1E5F132900DF4DA3 /* Model */,
 				41FEA8231E5F0DCA00DF4DA3 /* ViewController */,
 				41FEA7F71E5F084A00DF4DA3 /* AppDelegate.swift */,
@@ -153,6 +174,7 @@
 				41FEA8261E5F132500DF4DA3 /* Message.swift */,
 				41FEA8271E5F132500DF4DA3 /* Conversation.swift */,
 				41FEA8281E5F132500DF4DA3 /* PreviewItem.swift */,
+				0A6FDD4A1EB13E65007BC3EA /* Session.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -219,7 +241,7 @@
 				TargetAttributes = {
 					41FEA7F31E5F084A00DF4DA3 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 65NU4336S4;
+						DevelopmentTeam = S95WHWKHBE;
 						ProvisioningStyle = Automatic;
 					};
 					41FEA8071E5F084A00DF4DA3 = {
@@ -254,6 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AF202D21EAAB0B50031A9B7 /* ChatViewCell.xib in Resources */,
 				41FEA8021E5F084A00DF4DA3 /* LaunchScreen.storyboard in Resources */,
 				41FEA7FF1E5F084A00DF4DA3 /* Assets.xcassets in Resources */,
 				41FEA7FD1E5F084A00DF4DA3 /* Main.storyboard in Resources */,
@@ -312,7 +335,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -329,6 +352,7 @@
 				41FEA8201E5F0DC300DF4DA3 /* ConversationListViewController.swift in Sources */,
 				41FEA82B1E5F132500DF4DA3 /* Message.swift in Sources */,
 				41FEA8221E5F0DC300DF4DA3 /* InfoConversationViewController.swift in Sources */,
+				0A6FDD4B1EB13E65007BC3EA /* Session.swift in Sources */,
 				41FEA82A1E5F132500DF4DA3 /* User.swift in Sources */,
 				41FEA8211E5F0DC300DF4DA3 /* ChatViewController.swift in Sources */,
 				41FEA7F81E5F084A00DF4DA3 /* AppDelegate.swift in Sources */,
@@ -415,7 +439,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -459,7 +483,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -473,7 +497,7 @@
 			baseConfigurationReference = 043B527C0F777CBD65158200 /* Pods-Connect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 65NU4336S4;
+				DEVELOPMENT_TEAM = S95WHWKHBE;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -491,7 +515,7 @@
 			baseConfigurationReference = D671E7E9844DA7D7E9908E84 /* Pods-Connect.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 65NU4336S4;
+				DEVELOPMENT_TEAM = S95WHWKHBE;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

@@ -12,6 +12,21 @@ import RealmSwift
 
 class DBManager {
   
+  static func createSession(_ monkeyId: String, name: String, email: String) {
+    let realm = try! Realm()
+    try! realm.write {
+      realm.delete(realm.objects(Session.self))
+      realm.create(Session.self, value: ["monkeyId": monkeyId, "name": name, "email": email], update: true)
+    }
+  }
+  
+  static func deleteAllSessions() {
+    let realm = try! Realm()
+    try! realm.write {
+      realm.delete(realm.objects(Session.self))
+    }
+  }
+  
   class func deleteAll(){
     let realm = try! Realm()
     try! realm.write {
