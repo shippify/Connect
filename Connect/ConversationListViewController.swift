@@ -43,6 +43,8 @@ class ConversationsListViewController: UITableViewController {
   
   let appID = ""
   let appSecret = ""
+  let monkeyId: String = ""
+  let name: String = ""
   
   let dateFormatter = DateFormatter()
   
@@ -112,6 +114,8 @@ class ConversationsListViewController: UITableViewController {
     //register listener for changes in the socket connection
     NotificationCenter.default.addObserver(self, selector: #selector(self.handleConnectionChange), name: NSNotification.Name.MonkeySocketStatusChange, object: nil)
     
+    NotificationCenter.default.addObserver(self, selector: #selector(self.blockForhandleConnectionChange), name: NSNotification.Name.MonkeySocketStatusChange, object: nil)
+    
     //register listener for incoming messages
     NotificationCenter.default.addObserver(self, selector: #selector(self.messageReceived(_:)), name: NSNotification.Name.MonkeyMessage, object: nil)
     
@@ -154,8 +158,8 @@ class ConversationsListViewController: UITableViewController {
      *  Initialize Monkey
      */
     
-    let user = ["name":"",
-                "monkeyId": ""]
+    let user = ["name": name,
+                "monkeyId": monkeyId]
     
     let ignoredParams = ["password"]
     
@@ -561,6 +565,31 @@ extension ConversationsListViewController {
       Whisper.show(shout: announcement, to: self.navigationController!)
     }
   }
+  
+  func blockForhandleConnectionChange(_ notification: Foundation.Notification){
+    //handle connection changes
+    switch ((notification as NSNotification).userInfo!["status"] as! NSNumber).uint32Value{
+    case MOKConnectionStateDisconnected.rawValue, MOKConnectionStateConnecting.rawValue, MOKConnectionStateNoNetwork.rawValue:
+      
+      print("disconnected")
+      print("connecting")
+      print("no network")
+      tableView.isUserInteractionEnabled = false
+      tableView.isScrollEnabled = false
+      
+      break
+    case MOKConnectionStateConnected.rawValue:
+      
+      print("connected")
+      tableView.isUserInteractionEnabled = true
+      tableView.isScrollEnabled = true
+      
+      break
+    default:
+      fatalError()
+    }
+  }
+
 }
 
 //MARK: Monkey socket messages
