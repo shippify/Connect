@@ -97,23 +97,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     animation.duration = 0.07
     animation.repeatCount = 4
     animation.autoreverses = true
+    animation.addWrongAnimation(textFields: firstTextField, secondTextField, thridTextField, fourTextField)
     
-    
-    animation.fromValue = NSValue(cgPoint: CGPoint(x: firstTextField.center.x - 10, y: firstTextField.center.y))
-    animation.toValue = NSValue(cgPoint: CGPoint(x: firstTextField.center.x + 10, y: firstTextField.center.y))
-    firstTextField.layer.add(animation, forKey: "position")
-    
-    animation.fromValue = NSValue(cgPoint: CGPoint(x: secondTextField.center.x - 10, y: secondTextField.center.y))
-    animation.toValue = NSValue(cgPoint: CGPoint(x: secondTextField.center.x + 10, y: secondTextField.center.y))
-    secondTextField.layer.add(animation, forKey: "position")
-    
-    animation.fromValue = NSValue(cgPoint: CGPoint(x: thridTextField.center.x - 10, y: thridTextField.center.y))
-    animation.toValue = NSValue(cgPoint: CGPoint(x: thridTextField.center.x + 10, y: thridTextField.center.y))
-    thridTextField.layer.add(animation, forKey: "position")
-    
-    animation.fromValue = NSValue(cgPoint: CGPoint(x: fourTextField.center.x - 10, y: fourTextField.center.y))
-    animation.toValue = NSValue(cgPoint: CGPoint(x: fourTextField.center.x + 10, y: fourTextField.center.y))
-    fourTextField.layer.add(animation, forKey: "position")
   }
   
   func successAnimation() {
@@ -125,5 +110,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     let rotationNavigationController = mainStoryboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
     UIApplication.shared.keyWindow?.rootViewController = rotationNavigationController
     
+  }
+}
+
+extension CABasicAnimation {
+  
+  func addWrongAnimation(textFields: UITextField...){
+    for textField in textFields {
+      self.fromValue = NSValue(cgPoint: CGPoint(x: textField.center.x - 10, y: textField.center.y))
+      self.toValue = NSValue(cgPoint: CGPoint(x: textField.center.x + 10, y: textField.center.y))
+      textField.layer.add(self, forKey: "position")
+    }
   }
 }

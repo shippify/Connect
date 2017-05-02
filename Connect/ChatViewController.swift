@@ -124,6 +124,9 @@ class ChatViewController: MOKChatViewController, JSQMessagesComposerTextViewPast
     //register listener for open received
     NotificationCenter.default.addObserver(self, selector: #selector(self.openReceived(_:)), name: NSNotification.Name.MonkeyConversationOpen, object: nil)
     
+    //register listener for changes in the socket connection
+    NotificationCenter.default.addObserver(self, selector: #selector(self.blockForhandleConnectionChange), name: NSNotification.Name.MonkeySocketStatusChange, object: nil)
+    
     /**
      *	Register chat listeners
      */
@@ -917,6 +920,30 @@ extension ChatViewController {
       }
       conversation.lastRead = timestamp
       DBManager.store(conversation)
+    }
+  }
+  
+  func blockForhandleConnectionChange(_ notification: Foundation.Notification){
+    //handle TableView for connection changes
+    switch ((notification as NSNotification).userInfo!["status"] as! NSNumber).uint32Value{
+    case MOKConnectionStateDisconnected.rawValue, MOKConnectionStateConnecting.rawValue, MOKConnectionStateNoNetwork.rawValue:
+      
+      print("disconnected")
+      print("connecting")
+      print("no network")
+      collectionView.isUserInteractionEnabled = false
+      collectionView.isScrollEnabled = false
+      
+      break
+    case MOKConnectionStateConnected.rawValue:
+      
+      print("connected")
+      collectionView.isUserInteractionEnabled = true
+      collectionView.isScrollEnabled = true
+      
+      break
+    default:
+      fatalError()
     }
   }
   

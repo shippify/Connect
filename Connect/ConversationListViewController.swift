@@ -43,6 +43,8 @@ class ConversationsListViewController: UITableViewController {
   
   let appID = ""
   let appSecret = ""
+  let monkeyId = ""
+  let name = ""
   
   let dateFormatter = DateFormatter()
   
@@ -91,11 +93,6 @@ class ConversationsListViewController: UITableViewController {
     
     //register nib for table cell
     self.tableView.register(UINib(nibName: "ChatViewCell", bundle: nil), forCellReuseIdentifier: "ChatViewCell")
-    
-    //configure refresh control
-    self.refreshControl = UIRefreshControl()
-    self.refreshControl?.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
-    self.refreshControl?.addTarget(self, action: #selector(ConversationsListViewController.handleTableRefresh), for: .valueChanged)
     
     // screen info whr conversation list is empty
     let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
@@ -154,8 +151,8 @@ class ConversationsListViewController: UITableViewController {
      *  Initialize Monkey
      */
     
-    let user = ["name":"",
-                "monkeyId": ""]
+    let user = ["name": name,
+                "monkeyId": monkeyId]
     
     let ignoredParams = ["password"]
     
@@ -476,6 +473,7 @@ extension ConversationsListViewController {
     let text:String
     let color:UIColor
     var action:WhisperAction = .present
+    var isBlock:Bool = true
     
     //handle connection changes
     switch ((notification as NSNotification).userInfo!["status"] as! NSNumber).uint32Value{
@@ -498,6 +496,7 @@ extension ConversationsListViewController {
       
       text = "Connected"
       color = UIColor(red:0.26, green:0.60, blue:0.22, alpha:1.0)
+      isBlock = false
       
       action = .show
       
@@ -517,6 +516,9 @@ extension ConversationsListViewController {
       Whisper.show(whisper: notif, to: self.navigationController!, action: action)
       return
     }
+    
+    tableView.isUserInteractionEnabled = !isBlock
+    tableView.isScrollEnabled = !isBlock
     
     self.update(whisper: whisper, text: text, color: color, action: action)
   }
@@ -561,6 +563,7 @@ extension ConversationsListViewController {
       Whisper.show(shout: announcement, to: self.navigationController!)
     }
   }
+
 }
 
 //MARK: Monkey socket messages
@@ -606,8 +609,6 @@ extension ConversationsListViewController {
     if !Monkey.sharedInstance().isMessageOutgoing(message) {
       conversation!.unread += 1
       
-      //Show In-app notification
-      showInAppNotification(conversation?.info["name"] as! String? , avatarUrl: (conversation?.getAvatarURL())!, description: message.preview())
     }
     
     DBManager.store(conversation!)
@@ -868,13 +869,6 @@ extension ConversationsListViewController {
     }
   }
   
-  func handleTableRefresh(){
-    self.conversationArray = []
-    self.conversationHash = [:]
-    self.tableView.reloadData()
-    DBManager.deleteAll()
-    self.getConversations(0)
-  }
 }
 
 class ChatViewCell: UITableViewCell {
