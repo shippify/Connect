@@ -109,8 +109,6 @@ class ConversationsListViewController: UITableViewController {
     //register listener for changes in the socket connection
     NotificationCenter.default.addObserver(self, selector: #selector(self.handleConnectionChange), name: NSNotification.Name.MonkeySocketStatusChange, object: nil)
     
-    NotificationCenter.default.addObserver(self, selector: #selector(self.blockForhandleConnectionChange), name: NSNotification.Name.MonkeySocketStatusChange, object: nil)
-    
     //register listener for incoming messages
     NotificationCenter.default.addObserver(self, selector: #selector(self.messageReceived(_:)), name: NSNotification.Name.MonkeyMessage, object: nil)
     
@@ -475,6 +473,7 @@ extension ConversationsListViewController {
     let text:String
     let color:UIColor
     var action:WhisperAction = .present
+    let isBlock:Bool
     
     //handle connection changes
     switch ((notification as NSNotification).userInfo!["status"] as! NSNumber).uint32Value{
@@ -483,6 +482,7 @@ extension ConversationsListViewController {
       
       text = "Disconnected"
       color = .red
+      isBlock = true
       
       break
     case MOKConnectionStateConnecting.rawValue:
@@ -490,6 +490,7 @@ extension ConversationsListViewController {
       
       text = "Connecting"
       color = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
+      isBlock = true
       
       break
     case MOKConnectionStateConnected.rawValue:
@@ -497,6 +498,7 @@ extension ConversationsListViewController {
       
       text = "Connected"
       color = UIColor(red:0.26, green:0.60, blue:0.22, alpha:1.0)
+      isBlock = false
       
       action = .show
       
@@ -505,6 +507,7 @@ extension ConversationsListViewController {
       print("no network")
       text = "No Network"
       color = .black
+      isBlock = true
       
       break
     default:
@@ -516,6 +519,9 @@ extension ConversationsListViewController {
       Whisper.show(whisper: notif, to: self.navigationController!, action: action)
       return
     }
+    
+    tableView.isUserInteractionEnabled = !isBlock
+    tableView.isScrollEnabled = !isBlock
     
     self.update(whisper: whisper, text: text, color: color, action: action)
   }
@@ -558,30 +564,6 @@ extension ConversationsListViewController {
       })
       
       Whisper.show(shout: announcement, to: self.navigationController!)
-    }
-  }
-  
-  func blockForhandleConnectionChange(_ notification: Foundation.Notification){
-    //handle TableView for connection changes
-    switch ((notification as NSNotification).userInfo!["status"] as! NSNumber).uint32Value{
-    case MOKConnectionStateDisconnected.rawValue, MOKConnectionStateConnecting.rawValue, MOKConnectionStateNoNetwork.rawValue:
-      
-      print("disconnected")
-      print("connecting")
-      print("no network")
-      tableView.isUserInteractionEnabled = false
-      tableView.isScrollEnabled = false
-      
-      break
-    case MOKConnectionStateConnected.rawValue:
-      
-      print("connected")
-      tableView.isUserInteractionEnabled = true
-      tableView.isScrollEnabled = true
-      
-      break
-    default:
-      fatalError()
     }
   }
 
