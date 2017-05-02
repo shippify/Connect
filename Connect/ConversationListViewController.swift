@@ -43,8 +43,8 @@ class ConversationsListViewController: UITableViewController {
   
   let appID = ""
   let appSecret = ""
-  let monkeyId: String = ""
-  let name: String = ""
+  let monkeyId = ""
+  let name = ""
   
   let dateFormatter = DateFormatter()
   
@@ -93,11 +93,6 @@ class ConversationsListViewController: UITableViewController {
     
     //register nib for table cell
     self.tableView.register(UINib(nibName: "ChatViewCell", bundle: nil), forCellReuseIdentifier: "ChatViewCell")
-    
-    //configure refresh control
-    self.refreshControl = UIRefreshControl()
-    self.refreshControl?.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
-    self.refreshControl?.addTarget(self, action: #selector(ConversationsListViewController.handleTableRefresh), for: .valueChanged)
     
     // screen info whr conversation list is empty
     let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
@@ -567,7 +562,7 @@ extension ConversationsListViewController {
   }
   
   func blockForhandleConnectionChange(_ notification: Foundation.Notification){
-    //handle connection changes
+    //handle TableView for connection changes
     switch ((notification as NSNotification).userInfo!["status"] as! NSNumber).uint32Value{
     case MOKConnectionStateDisconnected.rawValue, MOKConnectionStateConnecting.rawValue, MOKConnectionStateNoNetwork.rawValue:
       
@@ -635,8 +630,6 @@ extension ConversationsListViewController {
     if !Monkey.sharedInstance().isMessageOutgoing(message) {
       conversation!.unread += 1
       
-      //Show In-app notification
-      showInAppNotification(conversation?.info["name"] as! String? , avatarUrl: (conversation?.getAvatarURL())!, description: message.preview())
     }
     
     DBManager.store(conversation!)
@@ -897,13 +890,6 @@ extension ConversationsListViewController {
     }
   }
   
-  func handleTableRefresh(){
-    self.conversationArray = []
-    self.conversationHash = [:]
-    self.tableView.reloadData()
-    DBManager.deleteAll()
-    self.getConversations(0)
-  }
 }
 
 class ChatViewCell: UITableViewCell {
