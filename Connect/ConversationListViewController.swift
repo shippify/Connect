@@ -473,7 +473,7 @@ extension ConversationsListViewController {
     let text:String
     let color:UIColor
     var action:WhisperAction = .present
-    let isBlock:Bool
+    var isBlock:Bool = true
     
     //handle connection changes
     switch ((notification as NSNotification).userInfo!["status"] as! NSNumber).uint32Value{
@@ -482,7 +482,6 @@ extension ConversationsListViewController {
       
       text = "Disconnected"
       color = .red
-      isBlock = true
       
       break
     case MOKConnectionStateConnecting.rawValue:
@@ -490,7 +489,6 @@ extension ConversationsListViewController {
       
       text = "Connecting"
       color = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
-      isBlock = true
       
       break
     case MOKConnectionStateConnected.rawValue:
@@ -507,7 +505,6 @@ extension ConversationsListViewController {
       print("no network")
       text = "No Network"
       color = .black
-      isBlock = true
       
       break
     default:
