@@ -15,7 +15,7 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - JSQSystemSoundPlayer (2.0.1)
-  - MonkeyKit (1.1.0):
+  - MonkeyKit (1.2.0):
     - AFNetworking
     - UICKeyChainStore
   - MonkeyKitUI (7.4.0):
@@ -32,17 +32,15 @@ PODS:
   - Whisper (4.0.0)
 
 DEPENDENCIES:
-  - MonkeyKit (from `~/Workspace/Monkey-SDK-iOS`)
-  - MonkeyKitUI (from `~/Workspace/Monkey-UI-iOS`)
+  - MonkeyKit
+  - MonkeyKitUI (from `~/Documents/git Shippify/Monkey-UI-iOS-master`)
   - RealmSwift (~> 1.1.0)
   - SDWebImage (~> 3.8.1)
   - Whisper (from `https://github.com/hyperoslo/Whisper.git`)
 
 EXTERNAL SOURCES:
-  MonkeyKit:
-    :path: ~/Workspace/Monkey-SDK-iOS
   MonkeyKitUI:
-    :path: ~/Workspace/Monkey-UI-iOS
+    :path: ~/Documents/git Shippify/Monkey-UI-iOS-master
   Whisper:
     :git: https://github.com/hyperoslo/Whisper.git
 
@@ -54,7 +52,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-  MonkeyKit: 9e5c34c6bac510ba1793fb283e8043a968950e4e
+  MonkeyKit: aa30b42342130c077f8a69a9a2b79782dc2adefd
   MonkeyKitUI: dd2042fbde1256efa413b3543de85c803d7718ac
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
@@ -62,6 +60,6 @@ SPEC CHECKSUMS:
   UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
 
-PODFILE CHECKSUM: 6382302f0854bae3b19b5ce846819026057262ab
+PODFILE CHECKSUM: 6048bb99152d9174139348815db7d2437455ff1d
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0
