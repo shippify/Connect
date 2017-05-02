@@ -599,8 +599,8 @@ extension ConversationsListViewController {
         self.conversationArray.append(conversation!)
       }
     }
-    
-    guard conversation != nil else { //create conversation if it doesn't exist
+
+    if conversationHash[conversationId] == nil {
       createConversation(conversationId, message: message)
       return
     }
