@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AAAB61F1EB90EF20086DE5E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB61E1EB90EF20086DE5E /* Session.swift */; };
 		0AAAB61D1EB9015E0086DE5E /* ChatViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AAAB61C1EB9015E0086DE5E /* ChatViewCell.xib */; };
+		0AAAB61F1EB90EF20086DE5E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB61E1EB90EF20086DE5E /* Session.swift */; };
+		0AAAB6251EBA355D0086DE5E /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB6241EBA355D0086DE5E /* SlideMenuViewController.swift */; };
+		0AAAB6271EBA38650086DE5E /* AppNavigationDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB6261EBA38650086DE5E /* AppNavigationDrawerController.swift */; };
 		41E88C1A1E8967ED00B9AF07 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E88C191E8967ED00B9AF07 /* InitialViewController.swift */; };
 		41E88C1C1E896A1D00B9AF07 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E88C1B1E896A1D00B9AF07 /* LoginViewController.swift */; };
 		41FEA7F81E5F084A00DF4DA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FEA7F71E5F084A00DF4DA3 /* AppDelegate.swift */; };
@@ -40,8 +42,10 @@
 
 /* Begin PBXFileReference section */
 		043B527C0F777CBD65158200 /* Pods-Connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connect/Pods-Connect.debug.xcconfig"; sourceTree = "<group>"; };
-		0AAAB61E1EB90EF20086DE5E /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		0AAAB61C1EB9015E0086DE5E /* ChatViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatViewCell.xib; path = ../../../../Desktop/ChatViewCell.xib; sourceTree = "<group>"; };
+		0AAAB61E1EB90EF20086DE5E /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		0AAAB6241EBA355D0086DE5E /* SlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
+		0AAAB6261EBA38650086DE5E /* AppNavigationDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigationDrawerController.swift; sourceTree = "<group>"; };
 		41E88C191E8967ED00B9AF07 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		41E88C1B1E896A1D00B9AF07 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		41FEA7F41E5F084A00DF4DA3 /* Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connect.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,12 +160,14 @@
 		41FEA8231E5F0DCA00DF4DA3 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0AAAB6261EBA38650086DE5E /* AppNavigationDrawerController.swift */,
 				41FEA81B1E5F0DC300DF4DA3 /* RotationNavigationController.swift */,
 				41FEA81C1E5F0DC300DF4DA3 /* ConversationListViewController.swift */,
 				41FEA81D1E5F0DC300DF4DA3 /* ChatViewController.swift */,
 				41FEA81E1E5F0DC300DF4DA3 /* InfoConversationViewController.swift */,
 				41E88C191E8967ED00B9AF07 /* InitialViewController.swift */,
 				41E88C1B1E896A1D00B9AF07 /* LoginViewController.swift */,
+				0AAAB6241EBA355D0086DE5E /* SlideMenuViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -356,6 +362,8 @@
 				41FEA82A1E5F132500DF4DA3 /* User.swift in Sources */,
 				41FEA8211E5F0DC300DF4DA3 /* ChatViewController.swift in Sources */,
 				41FEA7F81E5F084A00DF4DA3 /* AppDelegate.swift in Sources */,
+				0AAAB6251EBA355D0086DE5E /* SlideMenuViewController.swift in Sources */,
+				0AAAB6271EBA38650086DE5E /* AppNavigationDrawerController.swift in Sources */,
 				41FEA82C1E5F132500DF4DA3 /* Conversation.swift in Sources */,
 				41FEA8291E5F132500DF4DA3 /* DBManager.swift in Sources */,
 			);

@@ -14,7 +14,7 @@
         <scene sceneID="egQ-2H-7UA">
             <objects>
                 <navigationController storyboardIdentifier="Start" id="lRY-qb-crj" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CV0-nf-PTO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CV0-nf-PTO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -191,12 +191,73 @@
             </objects>
             <point key="canvasLocation" x="911" y="896"/>
         </scene>
+        <!--Slide Menu View Controller-->
+        <scene sceneID="OYH-GH-FG1">
+            <objects>
+                <viewController storyboardIdentifier="Menu" id="Z2v-cV-q0X" customClass="SlideMenuViewController" customModule="Connect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WG1-Vg-tss"/>
+                        <viewControllerLayoutGuide type="bottom" id="rmc-mU-ktQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vie-xm-efE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9L3-Qe-kRx">
+                                <rect key="frame" x="67" y="360" width="240" height="62"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" red="0.93333333330000001" green="0.25098039220000001" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="logOutSession:" destination="Z2v-cV-q0X" eventType="touchUpInside" id="hbr-ke-ofG"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qo0-hv-I4q">
+                                <rect key="frame" x="137" y="89" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="4Bf-NC-Wnc"/>
+                                    <constraint firstAttribute="width" constant="100" id="6fD-2S-1gu"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxq-Ng-Puh">
+                                <rect key="frame" x="67" y="224" width="240" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="35e-Ey-qYy"/>
+                                    <constraint firstAttribute="width" constant="240" id="VvE-ry-SIZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9L3-Qe-kRx" firstAttribute="height" secondItem="zxq-Ng-Puh" secondAttribute="height" id="COT-5V-zVh"/>
+                            <constraint firstItem="Qo0-hv-I4q" firstAttribute="top" secondItem="WG1-Vg-tss" secondAttribute="bottom" constant="69" id="H4r-xA-TbG"/>
+                            <constraint firstItem="9L3-Qe-kRx" firstAttribute="top" secondItem="zxq-Ng-Puh" secondAttribute="bottom" constant="74" id="SPB-jC-M99"/>
+                            <constraint firstItem="9L3-Qe-kRx" firstAttribute="width" secondItem="zxq-Ng-Puh" secondAttribute="width" id="Z07-dP-eub"/>
+                            <constraint firstItem="9L3-Qe-kRx" firstAttribute="centerX" secondItem="zxq-Ng-Puh" secondAttribute="centerX" id="aKf-XD-g4J"/>
+                            <constraint firstItem="Qo0-hv-I4q" firstAttribute="centerX" secondItem="Vie-xm-efE" secondAttribute="centerX" id="etr-sG-kGV"/>
+                            <constraint firstItem="zxq-Ng-Puh" firstAttribute="top" secondItem="Qo0-hv-I4q" secondAttribute="bottom" constant="35" id="i1a-eE-jnF"/>
+                            <constraint firstItem="zxq-Ng-Puh" firstAttribute="centerX" secondItem="Vie-xm-efE" secondAttribute="centerX" id="rsU-VM-dFa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="logoutButton" destination="9L3-Qe-kRx" id="VfQ-UR-8mc"/>
+                        <outlet property="nameLabel" destination="zxq-Ng-Puh" id="o8H-we-t0r"/>
+                        <outlet property="profileImage" destination="Qo0-hv-I4q" id="h8H-3X-V8y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QMm-yV-j0d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-738" y="896"/>
+        </scene>
         <!--Rotation Navigation Controller-->
         <scene sceneID="txq-iW-PjI">
             <objects>
                 <navigationController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" id="32B-Ta-O2g" customClass="RotationNavigationController" customModule="Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="C37-q7-z8P">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="C37-q7-z8P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

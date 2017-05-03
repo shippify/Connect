@@ -8,24 +8,40 @@
 
 import UIKit
 import RealmSwift
+import Material
+
+extension UIStoryboard {
+  class func viewController(identifier: String) -> UIViewController {
+    return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier)
+  }
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
+
+  lazy var rootViewController : RotationNavigationController = {
+    return UIStoryboard.viewController(identifier: "Main") as! RotationNavigationController
+  }()
+  
+  lazy var leftViewController: SlideMenuViewController = {
+    return UIStoryboard.viewController(identifier: "Menu") as! SlideMenuViewController
+  }()
+  
   
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     
+    let window = UIWindow(frame: UIScreen.main.bounds)
     let realm = try! Realm()
     let sessionExists = !realm.objects(Session.self).isEmpty
     
-    let window = UIWindow(frame: UIScreen.main.bounds)
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let viewControllerIdentifier = sessionExists ? "Main" : "Start"
-    let viewController = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier)
-    window.rootViewController = viewController
+    window.rootViewController = sessionExists ? AppNavigationDrawerController(rootViewController: rootViewController,
+      leftViewController: leftViewController,
+      rightViewController: nil) : UIStoryboard.viewController(identifier: "Start")
+    
     window.makeKeyAndVisible()
     self.window = window
     
