@@ -274,6 +274,10 @@ class ChatViewController: MOKChatViewController, JSQMessagesComposerTextViewPast
       return self.readDove
     }
     
+    if self.conversation.isGroup() && self.conversation.lastRead >= message.timestampCreated {
+      return self.readDove
+    }
+    
     if message.wasSent() {
       return self.sentDove
     }
@@ -901,6 +905,21 @@ extension ChatViewController {
       DBManager.store(self.conversation)
       self.statusLabel.text = "Last Seen " + self.conversation.getLastSeenDate()
       
+    } else {
+      
+      var messageLastSeenGroup = [Double]()
+      
+      if let lastOpenMessageMemberGroup = response["lastSeen"] as? [AnyHashable:Any] {
+        for lastOpenByMember in lastOpenMessageMemberGroup {
+          let lastSeen = Double(lastOpenByMember.value as! String)!
+          messageLastSeenGroup.append(lastSeen)
+        }
+        let smallerLastSeen = messageLastSeenGroup.sorted(by: <)[0]
+        if (smallerLastSeen > self.conversation.lastRead){
+          self.conversation.lastSeen = smallerLastSeen as TimeInterval
+        }
+      }
+      DBManager.store(self.conversation)
     }
   }
   
