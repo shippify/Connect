@@ -933,6 +933,7 @@ extension ChatViewController {
       print("no network")
       collectionView.isUserInteractionEnabled = false
       collectionView.isScrollEnabled = false
+      self.inputToolbar.contentView.isUserInteractionEnabled = false
       
       break
     case MOKConnectionStateConnected.rawValue:
@@ -940,6 +941,7 @@ extension ChatViewController {
       print("connected")
       collectionView.isUserInteractionEnabled = true
       collectionView.isScrollEnabled = true
+      self.inputToolbar.contentView.isUserInteractionEnabled = true
       
       break
     default:
