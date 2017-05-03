@@ -815,7 +815,7 @@ extension ConversationsListViewController {
           }
         }
         
-        conversation.info = NSMutableDictionary(dictionary: info["info"] as! Dictionary)
+        conversation.info = NSMutableDictionary(dictionary: info["info"] as? Dictionary ?? [:])
         conversation.lastMessage = message
         conversation.lastSeen = 0
         conversation.lastModified = message.timestampCreated
@@ -824,12 +824,6 @@ extension ConversationsListViewController {
         self.conversationArray.append(conversation)
         self.conversationHash[conversationId] = conversation
         DBManager.store(conversation)
-        
-        if !Monkey.sharedInstance().isMessageOutgoing(message) {
-          
-          //Show In-app notification
-          self.showInAppNotification(conversation.info["name"] as! String?, avatarUrl: conversation.getAvatarURL(), description: message.preview())
-        }
         
         self.updateConversationList()
         
@@ -849,12 +843,6 @@ extension ConversationsListViewController {
     self.conversationArray.append(conversation)
     self.conversationHash[conversationId] = conversation
     DBManager.store(conversation)
-    
-    if !Monkey.sharedInstance().isMessageOutgoing(message) {
-      
-      //Show In-app notification
-      showInAppNotification(conversation.info["name"] as! String?, avatarUrl: conversation.getAvatarURL(), description: message.preview())
-    }
     
     self.updateConversationList()
   }
