@@ -824,9 +824,11 @@ extension ChatViewController {
     DBManager.store(message)
     
     conversation!.lastMessage = message
-    self.messageHash[message.messageId] = message
-    self.messageArray.append(message)
-    self.finishReceivingMessage()
+    if (messageHash.values.filter{ $0.messageId == message.messageId}.isEmpty) {
+      self.messageHash[message.messageId] = message
+      self.messageArray.append(message)
+      self.finishReceivingMessage()
+    }
   }
   
   func acknowledgeReceived(_ notification:Foundation.Notification){
