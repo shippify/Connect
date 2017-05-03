@@ -18,4 +18,9 @@ class Session: Object {
     return "monkeyId"
   }
   
+  static var current: Session? {
+    let realm = try! Realm()
+    return realm.objects(Session.self).first
+  }
+  
 }

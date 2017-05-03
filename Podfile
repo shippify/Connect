@@ -7,6 +7,7 @@ target 'Connect' do
   pod 'SDWebImage', '~> 3.8.1'
   pod 'Whisper', :git => 'https://github.com/hyperoslo/Whisper.git'
   pod 'MonkeyKit'
+  pod 'Material', '~> 2.0'
 end
 
 post_install do |installer|

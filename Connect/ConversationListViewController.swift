@@ -63,6 +63,7 @@ class ConversationsListViewController: UITableViewController {
     // VIEW - navigation bar
     self.navigationItem.title = "Chat"
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu_azul"), style: .plain, target: self, action: #selector(showSlideMenu))
     
     //customize In-app
     ColorList.Shout.background = UIColor.black
@@ -427,6 +428,12 @@ class ConversationsListViewController: UITableViewController {
     self.tableView.reloadData()
   }
   
+}
+
+extension ConversationsListViewController {
+  func showSlideMenu() {
+    navigationDrawerController?.openLeftView()
+  }
 }
 
 //MARK: SearchController Delegate
