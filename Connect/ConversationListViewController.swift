@@ -607,7 +607,7 @@ extension ConversationsListViewController {
       }
     }
 
-    if conversationHash[conversationId] == nil {
+    if (conversationHash.values.filter{ $0.conversationId == conversationId}.isEmpty) {
       createConversation(conversationId, message: message)
       return
     }
