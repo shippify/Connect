@@ -23,7 +23,7 @@ final class SlideMenuViewController: UIViewController {
     
     guard let session = Session.current else { fatalError() }
     
-    nameLabel.text = "\(session.name) - \(session.email)"
+    nameLabel.text = session.email
     profileImage.image = UIImage(named: "Profile_imgDefault")
     logoutButton.titleLabel?.text = "Log Out"
     

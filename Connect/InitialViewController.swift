@@ -32,19 +32,28 @@ class InitialViewController: UIViewController {
       return
     }
     
-    self.performSegue(withIdentifier: "toPasswordSegue", sender: self)
+    let username = emailTextField.text!
+    API.sign(username, completion: { (result) in
+      switch(result) {
+      case .success():
+        self.performSegue(withIdentifier: "toPasswordSegue", sender: self)
+      case .failure(let error):
+        print(error)
+        break
+      }
+    }).resume()
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier! {
     case "toPasswordSegue":
       let loginViewController = segue.destination as! LoginViewController
-      loginViewController.email = emailTextField.text
+      loginViewController.username = emailTextField.text
     default:
       fatalError()
     }
   }
-
+  
 }
 
 extension InitialViewController {

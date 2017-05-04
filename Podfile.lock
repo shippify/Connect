@@ -33,6 +33,7 @@ PODS:
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - UICKeyChainStore (2.1.1)
+  - Unbox (2.4.0)
   - Whisper (4.0.0)
 
 DEPENDENCIES:
@@ -42,6 +43,7 @@ DEPENDENCIES:
   - MonkeyKitUI (from `~/Documents/git Shippify/Monkey-UI-iOS-master`)
   - RealmSwift (~> 1.1.0)
   - SDWebImage (~> 3.8.1)
+  - Unbox
   - Whisper (from `https://github.com/hyperoslo/Whisper.git`)
 
 EXTERNAL SOURCES:
@@ -66,8 +68,9 @@ SPEC CHECKSUMS:
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
+  Unbox: c8b2ab69d3337597b4a3f47a0538807dc12db670
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
 
-PODFILE CHECKSUM: bb9fd4be56e1d1bd3cd835d5d7a0c10d41bebd16
+PODFILE CHECKSUM: 78688acd7f859b21d1f69b10eca12c1a879cae78
 
 COCOAPODS: 1.2.0

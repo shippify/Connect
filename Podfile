@@ -9,6 +9,7 @@ target 'Connect' do
   pod 'MonkeyKit'
   pod 'Material', '~> 2.0'
   pod 'Alamofire', '~> 4.4'
+  pod 'Unbox'
 end
 
 post_install do |installer|

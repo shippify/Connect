@@ -41,9 +41,9 @@ class ConversationsListViewController: UITableViewController {
   let readDove = UIImage(named: "check-blue-icon.png")
   let sentDove = UIImage(named: "check-grey-icon.png")
   
-  let appID = ""
-  let appSecret = ""
-  let monkeyId = ""
+  let appID = globalVariables.APIID
+  let appSecret = globalVariables.APISECRET
+  let monkeyId = Session.current?.monkeyId
   let name = ""
   
   let dateFormatter = DateFormatter()

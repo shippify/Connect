@@ -8,8 +8,11 @@
 
 import UIKit
 
+
 class LoginViewController: UIViewController {
-  var email: String!
+  var username: String!
+  var monkeyId: String = ""
+
   @IBOutlet weak var firstTextField: UITextField!
   @IBOutlet weak var secondTextField: UITextField!
   @IBOutlet weak var thridTextField: UITextField!
@@ -20,7 +23,7 @@ class LoginViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    emailLabel.text = "Please check your inbox, we send you a code to your account:\(email!)"
+    emailLabel.text = "Please check your inbox, we send you a code to your account:\(username!)"
     
     firstTextField.delegate = self
     secondTextField.delegate = self
@@ -38,16 +41,26 @@ class LoginViewController: UIViewController {
   
   func textFieldDidChange(_ textField: UITextField) {
     if(self.firstTextField.text?.characters.count == 1 && self.secondTextField.text?.characters.count == 1 && thridTextField.text?.characters.count == 1 && self.fourTextField.text?.characters.count == 1) {
-      let a = Int(firstTextField.text!)
-      let b = Int(secondTextField.text!)
-      let c = Int(thridTextField.text!)
-      let d = Int(fourTextField.text!)
+      let a = firstTextField.text!
+      let b = secondTextField.text!
+      let c = thridTextField.text!
+      let d = fourTextField.text!
+      let code = [a,b,c,d].joined()
       
-      if (a == 1 && b == 2 && c == 3 && d == 4) {
-        successAnimation()
-      } else {
-        wrongCodeAnimation()
-      }
+      API.auth(username, code: code, completion: { [weak self] (result) in
+        switch(result) {
+        case .success(let monkeyId):
+          guard let strongSelf = self else {
+            return
+          }
+          
+          DBManager.createSession(monkeyId, email: (strongSelf.username)!)
+          strongSelf.successAnimation()
+        case .failure(_):
+          self?.wrongCodeAnimation()
+        }
+      }).resume()
+      
     }
     
     if textField.text?.characters.count == 0 {
@@ -102,9 +115,6 @@ class LoginViewController: UIViewController {
   }
   
   func successAnimation() {
-    let monkeyId: String = ""
-    let name: String = ""
-    DBManager.createSession(monkeyId, name: name, email: email)
     
     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     let rotationNavigationController = mainStoryboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController

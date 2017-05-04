@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A8563121EBBA15E00516651 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8563111EBBA15E00516651 /* API.swift */; };
+		0A8563151EBBC01C00516651 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8563141EBBC01C00516651 /* Globals.swift */; };
 		0AAAB61D1EB9015E0086DE5E /* ChatViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AAAB61C1EB9015E0086DE5E /* ChatViewCell.xib */; };
 		0AAAB61F1EB90EF20086DE5E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB61E1EB90EF20086DE5E /* Session.swift */; };
 		0AAAB6251EBA355D0086DE5E /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB6241EBA355D0086DE5E /* SlideMenuViewController.swift */; };
@@ -42,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		043B527C0F777CBD65158200 /* Pods-Connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connect/Pods-Connect.debug.xcconfig"; sourceTree = "<group>"; };
+		0A8563111EBBA15E00516651 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		0A8563141EBBC01C00516651 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		0AAAB61C1EB9015E0086DE5E /* ChatViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatViewCell.xib; path = ../../../../Desktop/ChatViewCell.xib; sourceTree = "<group>"; };
 		0AAAB61E1EB90EF20086DE5E /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		0AAAB6241EBA355D0086DE5E /* SlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +93,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A8563131EBBC00E00516651 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0A8563141EBBC01C00516651 /* Globals.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		0AAAB61A1EB901490086DE5E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,10 +148,12 @@
 		41FEA7F61E5F084A00DF4DA3 /* Connect */ = {
 			isa = PBXGroup;
 			children = (
+				0A8563131EBBC00E00516651 /* Utils */,
 				0AAAB61A1EB901490086DE5E /* Views */,
 				41FEA82E1E5F132900DF4DA3 /* Model */,
 				41FEA8231E5F0DCA00DF4DA3 /* ViewController */,
 				41FEA7F71E5F084A00DF4DA3 /* AppDelegate.swift */,
+				0A8563111EBBA15E00516651 /* API.swift */,
 				41FEA7FB1E5F084A00DF4DA3 /* Main.storyboard */,
 				41FEA7FE1E5F084A00DF4DA3 /* Assets.xcassets */,
 				41FEA8001E5F084A00DF4DA3 /* LaunchScreen.storyboard */,
@@ -355,6 +369,7 @@
 				41E88C1A1E8967ED00B9AF07 /* InitialViewController.swift in Sources */,
 				41FEA81F1E5F0DC300DF4DA3 /* RotationNavigationController.swift in Sources */,
 				41FEA82D1E5F132500DF4DA3 /* PreviewItem.swift in Sources */,
+				0A8563151EBBC01C00516651 /* Globals.swift in Sources */,
 				41FEA8201E5F0DC300DF4DA3 /* ConversationListViewController.swift in Sources */,
 				41FEA82B1E5F132500DF4DA3 /* Message.swift in Sources */,
 				41FEA8221E5F0DC300DF4DA3 /* InfoConversationViewController.swift in Sources */,
@@ -365,6 +380,7 @@
 				0AAAB6251EBA355D0086DE5E /* SlideMenuViewController.swift in Sources */,
 				0AAAB6271EBA38650086DE5E /* AppNavigationDrawerController.swift in Sources */,
 				41FEA82C1E5F132500DF4DA3 /* Conversation.swift in Sources */,
+				0A8563121EBBA15E00516651 /* API.swift in Sources */,
 				41FEA8291E5F132500DF4DA3 /* DBManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
