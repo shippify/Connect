@@ -8,11 +8,11 @@
 
 import UIKit
 import Material
+import SwiftSpinner
 
 class InitialViewController: UIViewController {
   
   @IBOutlet weak var emailTextField: ErrorTextField!
-  @IBOutlet weak var nameTextField: ErrorTextField!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,36 +21,31 @@ class InitialViewController: UIViewController {
   
   @IBAction func didPressRequestButton(_ sender: UIButton) {
     //Call API Criptext
-    
-    guard let name = nameTextField.text, !name.isEmpty else {
-      nameTextField.isErrorRevealed = true
-      return
-    }
-    
+    view.endEditing(true)
     guard let email = emailTextField.text, !email.isEmpty else {
       emailTextField.isErrorRevealed = true
       return
     }
     
     let username = emailTextField.text!
+    SwiftSpinner.show("Wait...")
     API.sign(username, completion: { (result) in
+      SwiftSpinner.hide()
       switch(result) {
       case .success():
         self.performSegue(withIdentifier: "toPasswordSegue", sender: self)
-      case .failure(let error):
-        print(error)
+      case .failure(_):
+        self.emailTextField.detail = "You have to entry an valid email"
+        self.emailTextField.isErrorRevealed = true
         break
       }
     }).resume()
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    switch segue.identifier! {
-    case "toPasswordSegue":
+    if segue.identifier == "toPasswordSegue" {
       let loginViewController = segue.destination as! LoginViewController
       loginViewController.username = emailTextField.text
-    default:
-      fatalError()
     }
   }
   
@@ -63,18 +58,9 @@ extension InitialViewController {
     emailTextField.isClearIconButtonEnabled = true
     emailTextField.delegate = self
     
-    nameTextField.placeholder = "Name"
-    nameTextField.detail = "Name is a required field"
-    nameTextField.isClearIconButtonEnabled = true
-    nameTextField.delegate = self
-    
     let leftViewEmail = UIImageView()
-    leftViewEmail.image = #imageLiteral(resourceName: "envelop-icon")
+    leftViewEmail.image = #imageLiteral(resourceName: "name-icon")
     emailTextField.leftView = leftViewEmail
-
-    let leftViewName = UIImageView()
-    leftViewName.image = #imageLiteral(resourceName: "name-icon")
-    nameTextField.leftView = leftViewName
 
   }
 }

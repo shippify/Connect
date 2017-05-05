@@ -9,6 +9,8 @@
 import UIKit
 import RealmSwift
 import Material
+import UserNotifications
+import MonkeyKit
 
 extension UIStoryboard {
   class func viewController(identifier: String) -> UIViewController {
@@ -34,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     
+
     let window = UIWindow(frame: UIScreen.main.bounds)
     let realm = try! Realm()
     let sessionExists = !realm.objects(Session.self).isEmpty
@@ -46,6 +49,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = window
     
     return true
+  }
+  
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    if Monkey.sharedInstance().monkeyId() != "" {
+      Monkey.sharedInstance().pushSubscribeDevice(deviceToken, success: {(task,data) in
+        print("available to receive notification")
+      }) {(task,error) in
+        print(error)
+      }
+    }
   }
   
   func applicationWillResignActive(_ application: UIApplication) {
@@ -70,6 +83,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
   
+  func registerForPushNotifications() {
+    if #available(iOS 10.0, *) {
+      //you need to import the UserNotifications framework
+      UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+        // Enable or disable features based on authorization.
+      }
+    } else {
+      // Fallback on earlier versions
+      let settings = UIUserNotificationSettings(types: [UIUserNotificationType.badge, UIUserNotificationType.alert, UIUserNotificationType.sound], categories: nil)
+      UIApplication.shared.registerUserNotificationSettings(settings)
+    }
+    UIApplication.shared.registerForRemoteNotifications()
+  }
   
 }
 

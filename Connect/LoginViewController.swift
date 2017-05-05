@@ -7,11 +7,10 @@
 //
 
 import UIKit
-
+import SwiftSpinner
 
 class LoginViewController: UIViewController {
   var username: String!
-  var monkeyId: String = ""
 
   @IBOutlet weak var firstTextField: UITextField!
   @IBOutlet weak var secondTextField: UITextField!
@@ -19,7 +18,13 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var fourTextField: UITextField!
   @IBOutlet weak var emailLabel: UILabel!
   
+  lazy var rootViewController : RotationNavigationController = {
+    return UIStoryboard.viewController(identifier: "Main") as! RotationNavigationController
+  }()
   
+  lazy var leftViewController: SlideMenuViewController = {
+    return UIStoryboard.viewController(identifier: "Menu") as! SlideMenuViewController
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,17 +51,20 @@ class LoginViewController: UIViewController {
       let c = thridTextField.text!
       let d = fourTextField.text!
       let code = [a,b,c,d].joined()
-      
+      view.endEditing(true)
+      SwiftSpinner.show("wait...")
       API.auth(username, code: code, completion: { [weak self] (result) in
         switch(result) {
         case .success(let monkeyId):
+          SwiftSpinner.hide()
           guard let strongSelf = self else {
             return
           }
           
-          DBManager.createSession(monkeyId, email: (strongSelf.username)!)
+          DBManager.createSession(monkeyId, name: "", email: (strongSelf.username)!)
           strongSelf.successAnimation()
         case .failure(_):
+          SwiftSpinner.hide()
           self?.wrongCodeAnimation()
         }
       }).resume()
@@ -115,11 +123,7 @@ class LoginViewController: UIViewController {
   }
   
   func successAnimation() {
-    
-    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    let rotationNavigationController = mainStoryboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-    UIApplication.shared.keyWindow?.rootViewController = rotationNavigationController
-    
+    UIApplication.shared.keyWindow?.rootViewController = AppNavigationDrawerController(rootViewController: rootViewController, leftViewController: leftViewController)
   }
 }
 

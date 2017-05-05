@@ -43,8 +43,8 @@ class ConversationsListViewController: UITableViewController {
   
   let appID = globalVariables.APIID
   let appSecret = globalVariables.APISECRET
-  let monkeyId = Session.current?.monkeyId
-  let name = ""
+  var monkeyId = ""
+  var name = ""
   
   let dateFormatter = DateFormatter()
   
@@ -151,6 +151,16 @@ class ConversationsListViewController: UITableViewController {
     /**
      *  Initialize Monkey
      */
+    guard let session = Session.current else { fatalError() }
+    self.monkeyId = session.monkeyId
+    self.name = session.name
+    
+    Monkey.sharedInstance().getInfo(monkeyId, success: { (result) in
+      let response = result
+      print(response)
+    }) { (task, error) in
+      print(error)
+    }
     
     let user = ["name": name,
                 "monkeyId": monkeyId]

@@ -11,6 +11,7 @@ import RealmSwift
 
 class Session: Object {
   dynamic var monkeyId = ""
+  dynamic var name = ""
   dynamic var email = ""
   
   override static func primaryKey() -> String? {
