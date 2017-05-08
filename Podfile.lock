@@ -15,7 +15,11 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - Alamofire (4.4.0)
+  - Crashlytics (3.8.4):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
   - JSQSystemSoundPlayer (2.0.1)
+  - lottie-ios (1.5.1)
   - Material (2.6.3):
     - Material/Core (= 2.6.3)
   - Material/Core (2.6.3)
@@ -39,6 +43,9 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
+  - Crashlytics
+  - Fabric
+  - lottie-ios
   - Material (~> 2.0)
   - MonkeyKit
   - MonkeyKitUI (from `~/Documents/git Shippify/Monkey-UI-iOS-master`)
@@ -62,7 +69,10 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  lottie-ios: f680a7c4cb7a567ecf258fde0f967913aff111b8
   Material: af607a7ec0e9978ef85cf189a3d8ceeeb650400f
   MonkeyKit: aa30b42342130c077f8a69a9a2b79782dc2adefd
   MonkeyKitUI: dd2042fbde1256efa413b3543de85c803d7718ac
@@ -74,6 +84,6 @@ SPEC CHECKSUMS:
   Unbox: c8b2ab69d3337597b4a3f47a0538807dc12db670
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
 
-PODFILE CHECKSUM: 1c318eb305771009e433df62574bbc5b7635dfa1
+PODFILE CHECKSUM: e5e0cee1470590c7ef241af6dec93063b336825d
 
 COCOAPODS: 1.2.0

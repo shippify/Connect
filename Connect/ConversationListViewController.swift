@@ -41,8 +41,8 @@ class ConversationsListViewController: UITableViewController {
   let readDove = UIImage(named: "check-blue-icon.png")
   let sentDove = UIImage(named: "check-grey-icon.png")
   
-  let appID = globalVariables.APIID
-  let appSecret = globalVariables.APISECRET
+  let appID = APIID
+  let appSecret = APISECRET
   var monkeyId = ""
   var name = ""
   
@@ -217,6 +217,11 @@ class ConversationsListViewController: UITableViewController {
       //hide search bar if the first row is visible
       self.tableView.setContentOffset(CGPoint(x: 0, y: 44), animated: false)
     }
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    view.initialAnimation()
   }
   
   deinit {
@@ -616,8 +621,8 @@ extension ConversationsListViewController {
         self.conversationArray.append(conversation!)
       }
     }
-
-    if (conversationHash.values.filter{ $0.conversationId == conversationId}.isEmpty) {
+    
+    if (conversationHash.values.filter{ $0.conversationId == conversationId}.isEmpty) && (conversationArray.filter{ $0.conversationId == conversationId }.isEmpty) {
       createConversation(conversationId, message: message)
       return
     }

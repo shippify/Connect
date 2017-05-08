@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "Please provide us your name"; ObjectID = "0cn-t2-Rqj"; */
+"0cn-t2-Rqj.text" = "Please provide us your name";
+
+/* Class = "UIButton"; normalTitle = "Request passcode"; ObjectID = "4We-Un-Zpp"; */
+"4We-Un-Zpp.normalTitle" = "Request passcode";
+
+/* Class = "UIButton"; normalTitle = "Logout"; ObjectID = "9L3-Qe-kRx"; */
+"9L3-Qe-kRx.normalTitle" = "Logout";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Dpm-gw-guc"; */
+"Dpm-gw-guc.normalTitle" = "Save";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "hwM-sz-MZu"; */
+"hwM-sz-MZu.text" = "Label";
+
+/* Class = "UILabel"; text = "Welcome"; ObjectID = "x4J-0H-u9i"; */
+"x4J-0H-u9i.text" = "Welcome";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "zxq-Ng-Puh"; */
+"zxq-Ng-Puh.text" = "Label";

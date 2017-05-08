@@ -11,6 +11,8 @@ import RealmSwift
 import Material
 import UserNotifications
 import MonkeyKit
+import Fabric
+import Crashlytics
 
 extension UIStoryboard {
   class func viewController(identifier: String) -> UIViewController {
@@ -22,21 +24,11 @@ extension UIStoryboard {
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
-
-  lazy var rootViewController : RotationNavigationController = {
-    return UIStoryboard.viewController(identifier: "Main") as! RotationNavigationController
-  }()
-  
-  lazy var leftViewController: SlideMenuViewController = {
-    return UIStoryboard.viewController(identifier: "Menu") as! SlideMenuViewController
-  }()
-  
-  
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     
-
+    Fabric.with([Crashlytics.self])
     let window = UIWindow(frame: UIScreen.main.bounds)
     let realm = try! Realm()
     let sessionExists = !realm.objects(Session.self).isEmpty
@@ -77,6 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationDidBecomeActive(_ application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    UIApplication.shared.applicationIconBadgeNumber = 0
   }
   
   func applicationWillTerminate(_ application: UIApplication) {

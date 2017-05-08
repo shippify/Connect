@@ -24,14 +24,14 @@ public enum CriptextAPIError: Error {
 public struct API  {
   
   public static func sign(_ username: String, completion: @escaping(Either<Void, CriptextAPIError>) -> ()) -> Request {
-    let urlString = "https://secure.criptext.com/v1.1/users/sign"
+    let urlString = baseURL + "/v1.1/users/sign"
     let parameters = [
       "username":username
     ]
     
-    return request(urlString, method: .post, parameters: parameters).authenticate(user: globalVariables.APIID, password: globalVariables.APISECRET).responseData(completionHandler: { (response) in
+    return request(urlString, method: .post, parameters: parameters).authenticate(user: APIID, password: APISECRET).responseData(completionHandler: { (response) in
       switch response.result {
-      case .success(let data):
+      case .success( _):
         let result: Either<Void, CriptextAPIError>
         do {
           let status = response.response?.statusCode
@@ -52,23 +52,24 @@ public struct API  {
     })
   }
   
-  public static func auth(_ username:String, code:String, completion: @escaping(Either<String, CriptextAPIError>) ->()) -> Request {
-    let urlString = "https://secure.criptext.com/v1.1/users/auth"
+  public static func auth(_ username:String, code:String, completion: @escaping(Either<SessionLogin, CriptextAPIError>) ->()) -> Request {
+    let urlString = baseURL + "/v1.1/users/auth"
     let parameters = [
       "username": username,
       "code": code
     ]
     
-    return request(urlString, method: .post, parameters: parameters).authenticate(user: globalVariables.APIID, password: globalVariables.APISECRET).responseData { (response) in
+    return request(urlString, method: .post, parameters: parameters).authenticate(user: APIID, password: APISECRET).responseData { (response) in
       switch response.result {
       case .success(let data):
-        let result: Either<String, CriptextAPIError>
+        let result: Either<SessionLogin, CriptextAPIError>
         do {
         let status = response.response?.statusCode
         if status == 200 {
           let monkeyID:String = try Unboxer.performCustomUnboxing(data: data, closure: { $0.unbox(keyPath: "user.id") })
-          print(monkeyID)
-          result = .success(monkeyID)
+          let name:String = try Unboxer.performCustomUnboxing(data: data, closure: { $0.unbox(keyPath: "user.meta.name") }) ?? ""
+          let sessionLogin = SessionLogin(name: name, monkeyId: monkeyID)
+          result = .success(sessionLogin)
         } else {
           result = .failure(.unknown)
         }

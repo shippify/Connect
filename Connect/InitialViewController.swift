@@ -9,14 +9,28 @@
 import UIKit
 import Material
 import SwiftSpinner
+import Lottie
 
 class InitialViewController: UIViewController {
   
   @IBOutlet weak var emailTextField: ErrorTextField!
+  var alreadyPushViewController: Bool = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     setupViews()
+    view.addGestureRecognizer(tap)
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    alreadyPushViewController = false
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(true)
+    view.initialAnimation()
   }
   
   @IBAction func didPressRequestButton(_ sender: UIButton) {
@@ -28,12 +42,15 @@ class InitialViewController: UIViewController {
     }
     
     let username = emailTextField.text!
-    SwiftSpinner.show("Wait...")
+    SwiftSpinner.show("Wait...".localized)
     API.sign(username, completion: { (result) in
       SwiftSpinner.hide()
       switch(result) {
       case .success():
-        self.performSegue(withIdentifier: "toPasswordSegue", sender: self)
+        if self.alreadyPushViewController == false {
+          self.alreadyPushViewController = true
+          self.performSegue(withIdentifier: "toPasswordSegue", sender: self)
+        }
       case .failure(_):
         self.emailTextField.detail = "You have to entry an valid email"
         self.emailTextField.isErrorRevealed = true
@@ -52,17 +69,25 @@ class InitialViewController: UIViewController {
 }
 
 extension InitialViewController {
+  
   func setupViews() {
-    emailTextField.placeholder = "Email"
+    emailTextField.placeholder = "Email".localized
     emailTextField.detail = "Email is a required field"
     emailTextField.isClearIconButtonEnabled = true
     emailTextField.delegate = self
     
     let leftViewEmail = UIImageView()
-    leftViewEmail.image = #imageLiteral(resourceName: "name-icon")
+    leftViewEmail.image = #imageLiteral(resourceName: "mailicon")
     emailTextField.leftView = leftViewEmail
 
   }
+  
+  func dismissKeyboard() {
+
+    view.endEditing(true)
+    
+  }
+  
 }
 
 extension UIViewController: TextFieldDelegate {

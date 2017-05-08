@@ -11,6 +11,9 @@ target 'Connect' do
   pod 'Alamofire', '~> 4.4'
   pod 'Unbox'
   pod 'SwiftSpinner'
+  pod 'lottie-ios'
+  pod 'Fabric'
+  pod 'Crashlytics'
 end
 
 post_install do |installer|

@@ -20,6 +20,14 @@ class DBManager {
     }
   }
   
+  static func updateSession(_ name:String) {
+    let realm = try! Realm()
+    let session = realm.objects(Session.self).first
+    try! realm.write {
+      session?.name = name
+    }
+  }
+  
   static func deleteAllSessions() {
     let realm = try! Realm()
     try! realm.write {

@@ -10,21 +10,15 @@ import UIKit
 import SwiftSpinner
 
 class LoginViewController: UIViewController {
+  
   var username: String!
-
+  var monkeyId = ""
+  
   @IBOutlet weak var firstTextField: UITextField!
   @IBOutlet weak var secondTextField: UITextField!
   @IBOutlet weak var thridTextField: UITextField!
   @IBOutlet weak var fourTextField: UITextField!
   @IBOutlet weak var emailLabel: UILabel!
-  
-  lazy var rootViewController : RotationNavigationController = {
-    return UIStoryboard.viewController(identifier: "Main") as! RotationNavigationController
-  }()
-  
-  lazy var leftViewController: SlideMenuViewController = {
-    return UIStoryboard.viewController(identifier: "Menu") as! SlideMenuViewController
-  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,14 +49,23 @@ class LoginViewController: UIViewController {
       SwiftSpinner.show("wait...")
       API.auth(username, code: code, completion: { [weak self] (result) in
         switch(result) {
-        case .success(let monkeyId):
+        case .success(let sessionLoginResponse):
           SwiftSpinner.hide()
           guard let strongSelf = self else {
             return
           }
           
-          DBManager.createSession(monkeyId, name: "", email: (strongSelf.username)!)
-          strongSelf.successAnimation()
+          if sessionLoginResponse.name != "" {
+            let monkeyId = sessionLoginResponse.monkeyId!
+            let name = sessionLoginResponse.name!
+            
+            DBManager.createSession(monkeyId, name: name, email: (strongSelf.username)!)
+            UIApplication.shared.keyWindow?.rootViewController = AppNavigationDrawerController(rootViewController: rootViewController, leftViewController: leftViewController)
+          } else {
+            strongSelf.monkeyId = sessionLoginResponse.monkeyId!
+            strongSelf.performSegue(withIdentifier: "segueFormName", sender: self)
+          }
+          
         case .failure(_):
           SwiftSpinner.hide()
           self?.wrongCodeAnimation()
@@ -111,7 +114,6 @@ class LoginViewController: UIViewController {
     return true
   }
 
-  
   func wrongCodeAnimation() {
     
     let animation = CABasicAnimation(keyPath: "position")
@@ -122,18 +124,13 @@ class LoginViewController: UIViewController {
     
   }
   
-  func successAnimation() {
-    UIApplication.shared.keyWindow?.rootViewController = AppNavigationDrawerController(rootViewController: rootViewController, leftViewController: leftViewController)
-  }
-}
-
-extension CABasicAnimation {
-  
-  func addWrongAnimation(textFields: UITextField...){
-    for textField in textFields {
-      self.fromValue = NSValue(cgPoint: CGPoint(x: textField.center.x - 10, y: textField.center.y))
-      self.toValue = NSValue(cgPoint: CGPoint(x: textField.center.x + 10, y: textField.center.y))
-      textField.layer.add(self, forKey: "position")
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "segueFormName" {
+      
+      let navigationController = segue.destination as! UINavigationController
+      let nameFormViewController = navigationController.topViewController as! NameFormViewController
+      nameFormViewController.monkeyId = self.monkeyId
+      
     }
   }
 }
