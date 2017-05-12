@@ -619,7 +619,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.criptext.Connect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "25b680ea-6849-4a28-9657-a4a726064a29";
+				PROVISIONING_PROFILE = "f8263b11-74bb-4fdb-8b81-bd5b6e6bc16b";
 				PROVISIONING_PROFILE_SPECIFIER = "Connect-Dev";
 				SWIFT_VERSION = 3.0;
 			};
@@ -641,7 +641,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.criptext.Connect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a246faae-6e05-477c-ac70-4c84497861dc";
+				PROVISIONING_PROFILE = "ab65d36c-b01f-4af1-80aa-d8d66ae9736b";
 				PROVISIONING_PROFILE_SPECIFIER = "Connect-Ad-Hoc";
 				SWIFT_VERSION = 3.0;
 			};

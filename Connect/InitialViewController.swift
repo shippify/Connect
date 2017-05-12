@@ -21,16 +21,13 @@ class InitialViewController: UIViewController {
     let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     setupViews()
     view.addGestureRecognizer(tap)
+    
+    view.initialAnimation()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     alreadyPushViewController = false
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(true)
-    view.initialAnimation()
   }
   
   @IBAction func didPressRequestButton(_ sender: UIButton) {

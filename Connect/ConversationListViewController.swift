@@ -155,13 +155,6 @@ class ConversationsListViewController: UITableViewController {
     self.monkeyId = session.monkeyId
     self.name = session.name
     
-    Monkey.sharedInstance().getInfo(monkeyId, success: { (result) in
-      let response = result
-      print(response)
-    }) { (task, error) in
-      print(error)
-    }
-    
     let user = ["name": name,
                 "monkeyId": monkeyId]
     
@@ -200,6 +193,7 @@ class ConversationsListViewController: UITableViewController {
                                         failure: {(task, error) in
                                           print(error.localizedDescription)
     })
+    view.initialAnimation()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -217,11 +211,6 @@ class ConversationsListViewController: UITableViewController {
       //hide search bar if the first row is visible
       self.tableView.setContentOffset(CGPoint(x: 0, y: 44), animated: false)
     }
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(true)
-    view.initialAnimation()
   }
   
   deinit {
