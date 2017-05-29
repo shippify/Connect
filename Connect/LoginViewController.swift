@@ -66,9 +66,13 @@ class LoginViewController: UIViewController {
             strongSelf.performSegue(withIdentifier: "segueFormName", sender: self)
           }
           
-        case .failure(_):
+        case .failure(let error):
           SwiftSpinner.hide()
-          self?.wrongCodeAnimation()
+          if error == .noLinkedAccount {
+            self?.performSegue(withIdentifier: "unwindNoLinkedAccount", sender: self)
+          } else {
+            self?.wrongCodeAnimation()
+          }
         }
       }).resume()
       

@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A684EDF1ECCE2100073B525 /* ChatViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A684EDE1ECCE2100073B525 /* ChatViewCell.xib */; };
 		0A8563121EBBA15E00516651 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8563111EBBA15E00516651 /* API.swift */; };
 		0A8563151EBBC01C00516651 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8563141EBBC01C00516651 /* Globals.swift */; };
-		0AAAB61D1EB9015E0086DE5E /* ChatViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AAAB61C1EB9015E0086DE5E /* ChatViewCell.xib */; };
 		0AAAB61F1EB90EF20086DE5E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB61E1EB90EF20086DE5E /* Session.swift */; };
 		0AAAB6251EBA355D0086DE5E /* SlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB6241EBA355D0086DE5E /* SlideMenuViewController.swift */; };
 		0AAAB6271EBA38650086DE5E /* AppNavigationDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAB6261EBA38650086DE5E /* AppNavigationDrawerController.swift */; };
+		0AF8E74B1EDC619A00583F63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8E7471EDC619A00583F63 /* LaunchScreen.storyboard */; };
+		0AF8E74C1EDC619A00583F63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8E7491EDC619A00583F63 /* Main.storyboard */; };
 		0AFC14811EBCC5790074EC38 /* NameFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC14801EBCC5790074EC38 /* NameFormViewController.swift */; };
 		0AFC14831EBCEDE00074EC38 /* SessionLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC14821EBCEDE00074EC38 /* SessionLogin.swift */; };
 		0AFC14901EBD28950074EC38 /* animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC148F1EBD28950074EC38 /* animation.json */; };
-		0AFC14B31EBD3F5E0074EC38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC14B51EBD3F5E0074EC38 /* Main.storyboard */; };
-		0AFC14B61EBD3F630074EC38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC14B81EBD3F630074EC38 /* LaunchScreen.storyboard */; };
 		0AFC14BD1EBD405C0074EC38 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC14BF1EBD405C0074EC38 /* Localizable.strings */; };
 		41E88C1A1E8967ED00B9AF07 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E88C191E8967ED00B9AF07 /* InitialViewController.swift */; };
 		41E88C1C1E896A1D00B9AF07 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E88C1B1E896A1D00B9AF07 /* LoginViewController.swift */; };
@@ -48,31 +48,23 @@
 
 /* Begin PBXFileReference section */
 		043B527C0F777CBD65158200 /* Pods-Connect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connect/Pods-Connect.debug.xcconfig"; sourceTree = "<group>"; };
+		0A684EDE1ECCE2100073B525 /* ChatViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatViewCell.xib; path = ../../_FILES_CONNECT/ChatViewCell.xib; sourceTree = "<group>"; };
 		0A8563111EBBA15E00516651 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0A8563141EBBC01C00516651 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		0A8563161EBBF51900516651 /* Connect.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Connect.entitlements; sourceTree = "<group>"; };
-		0AAAB61C1EB9015E0086DE5E /* ChatViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatViewCell.xib; path = ../../../../Desktop/ChatViewCell.xib; sourceTree = "<group>"; };
 		0AAAB61E1EB90EF20086DE5E /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		0AAAB6241EBA355D0086DE5E /* SlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideMenuViewController.swift; sourceTree = "<group>"; };
 		0AAAB6261EBA38650086DE5E /* AppNavigationDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigationDrawerController.swift; sourceTree = "<group>"; };
+		0AF8E7481EDC619A00583F63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0AF8E74A1EDC619A00583F63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0AFC14801EBCC5790074EC38 /* NameFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameFormViewController.swift; sourceTree = "<group>"; };
 		0AFC14821EBCEDE00074EC38 /* SessionLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionLogin.swift; sourceTree = "<group>"; };
 		0AFC148F1EBD28950074EC38 /* animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = animation.json; path = ../../_FILES_CONNECT/animation.json; sourceTree = "<group>"; };
-		0AFC14B91EBD3F6B0074EC38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0AFC14BA1EBD3F6B0074EC38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AFC14BE1EBD405C0074EC38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0AFC14C01EBD405F0074EC38 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0AFC14C11EBD406F0074EC38 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0AFC14C21EBD406F0074EC38 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
-		0AFC14C31EBD406F0074EC38 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		0AFC14C41EBD41500074EC38 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		0AFC14C51EBD41500074EC38 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
-		0AFC14C61EBD41500074EC38 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		0AFC14C71EBD41550074EC38 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		0AFC14C81EBD41550074EC38 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Main.strings"; sourceTree = "<group>"; };
-		0AFC14C91EBD41550074EC38 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		0AFC14CA1EBD415E0074EC38 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Main.strings"; sourceTree = "<group>"; };
-		0AFC14CB1EBD415E0074EC38 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		0AFC14CC1EBD415E0074EC38 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		41E88C191E8967ED00B9AF07 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		41E88C1B1E896A1D00B9AF07 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +126,7 @@
 		0AAAB61B1EB901540086DE5E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0AAAB61C1EB9015E0086DE5E /* ChatViewCell.xib */,
+				0A684EDE1ECCE2100073B525 /* ChatViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -185,11 +177,11 @@
 				41FEA8231E5F0DCA00DF4DA3 /* ViewController */,
 				41FEA7F71E5F084A00DF4DA3 /* AppDelegate.swift */,
 				0A8563111EBBA15E00516651 /* API.swift */,
+				0AF8E7471EDC619A00583F63 /* LaunchScreen.storyboard */,
+				0AF8E7491EDC619A00583F63 /* Main.storyboard */,
 				0AFC148C1EBD264F0074EC38 /* Support Files */,
 				0AFC148F1EBD28950074EC38 /* animation.json */,
 				41FEA7FE1E5F084A00DF4DA3 /* Assets.xcassets */,
-				0AFC14B51EBD3F5E0074EC38 /* Main.storyboard */,
-				0AFC14B81EBD3F630074EC38 /* LaunchScreen.storyboard */,
 				41FEA8031E5F084A00DF4DA3 /* Info.plist */,
 			);
 			path = Connect;
@@ -343,10 +335,10 @@
 			files = (
 				0AFC14901EBD28950074EC38 /* animation.json in Resources */,
 				0AFC14BD1EBD405C0074EC38 /* Localizable.strings in Resources */,
-				0AFC14B31EBD3F5E0074EC38 /* Main.storyboard in Resources */,
-				0AFC14B61EBD3F630074EC38 /* LaunchScreen.storyboard in Resources */,
-				0AAAB61D1EB9015E0086DE5E /* ChatViewCell.xib in Resources */,
 				41FEA7FF1E5F084A00DF4DA3 /* Assets.xcassets in Resources */,
+				0AF8E74C1EDC619A00583F63 /* Main.storyboard in Resources */,
+				0AF8E74B1EDC619A00583F63 /* LaunchScreen.storyboard in Resources */,
+				0A684EDF1ECCE2100073B525 /* ChatViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,30 +458,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0AFC14B51EBD3F5E0074EC38 /* Main.storyboard */ = {
+		0AF8E7471EDC619A00583F63 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0AFC14B91EBD3F6B0074EC38 /* Base */,
-				0AFC14C21EBD406F0074EC38 /* es */,
-				0AFC14C51EBD41500074EC38 /* pt-BR */,
-				0AFC14C81EBD41550074EC38 /* es-MX */,
-				0AFC14CA1EBD415E0074EC38 /* pt-PT */,
-			);
-			name = Main.storyboard;
-			path = ../../../../.Trash;
-			sourceTree = "<group>";
-		};
-		0AFC14B81EBD3F630074EC38 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0AFC14BA1EBD3F6B0074EC38 /* Base */,
-				0AFC14C31EBD406F0074EC38 /* es */,
-				0AFC14C61EBD41500074EC38 /* pt-BR */,
-				0AFC14C91EBD41550074EC38 /* es-MX */,
-				0AFC14CB1EBD415E0074EC38 /* pt-PT */,
+				0AF8E7481EDC619A00583F63 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			path = ../../../../.Trash;
+			sourceTree = "<group>";
+		};
+		0AF8E7491EDC619A00583F63 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0AF8E74A1EDC619A00583F63 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		0AFC14BF1EBD405C0074EC38 /* Localizable.strings */ = {
@@ -616,12 +598,14 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Connect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.criptext.Connect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f8263b11-74bb-4fdb-8b81-bd5b6e6bc16b";
+				PROVISIONING_PROFILE = "32415633-feb2-4722-8e8d-afc007833139";
 				PROVISIONING_PROFILE_SPECIFIER = "Connect-Dev";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -638,12 +622,14 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Connect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.criptext.Connect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ab65d36c-b01f-4af1-80aa-d8d66ae9736b";
+				PROVISIONING_PROFILE = "ae776981-0783-494a-ba39-3b35a256e6d4";
 				PROVISIONING_PROFILE_SPECIFIER = "Connect-Ad-Hoc";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

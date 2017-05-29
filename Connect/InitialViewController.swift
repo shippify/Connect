@@ -17,12 +17,13 @@ class InitialViewController: UIViewController {
   var alreadyPushViewController: Bool = false
   
   override func viewDidLoad() {
+    
     super.viewDidLoad()
     let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     setupViews()
     view.addGestureRecognizer(tap)
-    
     view.initialAnimation()
+    
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -88,6 +89,7 @@ extension InitialViewController {
 }
 
 extension UIViewController: TextFieldDelegate {
+  
   public func textFieldDidEndEditing(_ textField: UITextField) {
     (textField as? ErrorTextField)?.isErrorRevealed = false
   }
@@ -100,5 +102,14 @@ extension UIViewController: TextFieldDelegate {
   public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     (textField as? ErrorTextField)?.isErrorRevealed = false
     return true
+  }
+  
+}
+
+extension InitialViewController {
+  
+  @IBAction func didEntryUnlinkedEmail(_ segue: UIStoryboardSegue) {
+    emailTextField.detail = "There is no linked account"
+    emailTextField.isErrorRevealed = true
   }
 }

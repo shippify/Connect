@@ -18,6 +18,7 @@ public enum Either<T, U: Error> {
 
 public enum CriptextAPIError: Error {
   case unknown
+  case noLinkedAccount
   case notSend
 }
 
@@ -70,6 +71,8 @@ public struct API  {
           let name:String = try Unboxer.performCustomUnboxing(data: data, closure: { $0.unbox(keyPath: "user.meta.name") }) ?? ""
           let sessionLogin = SessionLogin(name: name, monkeyId: monkeyID)
           result = .success(sessionLogin)
+        } else if status == 401 {
+          result = .failure(.noLinkedAccount)
         } else {
           result = .failure(.unknown)
         }
