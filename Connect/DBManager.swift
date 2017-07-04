@@ -12,11 +12,19 @@ import RealmSwift
 
 class DBManager {
   
-  static func createSession(_ monkeyId: String, name: String, email: String) {
+  static func createSession(_ monkeyId:String, name:String, email:String) {
     let realm = try! Realm()
     try! realm.write {
       realm.delete(realm.objects(Session.self))
-      realm.create(Session.self, value: ["monkeyId": monkeyId, "name": name, "email": email], update: true)
+      realm.create(Session.self, value: ["monkeyId": monkeyId, "name":name, "email": email], update: true)
+    }
+  }
+  
+  static func updateSession(_ name:String) {
+    let realm = try! Realm()
+    let session = realm.objects(Session.self).first
+    try! realm.write {
+      session?.name = name
     }
   }
   

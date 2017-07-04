@@ -41,10 +41,10 @@ class ConversationsListViewController: UITableViewController {
   let readDove = UIImage(named: "check-blue-icon.png")
   let sentDove = UIImage(named: "check-grey-icon.png")
   
-  let appID = ""
-  let appSecret = ""
-  let monkeyId = ""
-  let name = ""
+  let appID = APIID
+  let appSecret = APISECRET
+  var monkeyId = ""
+  var name = ""
   
   let dateFormatter = DateFormatter()
   
@@ -151,6 +151,9 @@ class ConversationsListViewController: UITableViewController {
     /**
      *  Initialize Monkey
      */
+    guard let session = Session.current else { fatalError() }
+    self.monkeyId = session.monkeyId
+    self.name = session.name
     
     let user = ["name": name,
                 "monkeyId": monkeyId]
@@ -190,6 +193,7 @@ class ConversationsListViewController: UITableViewController {
                                         failure: {(task, error) in
                                           print(error.localizedDescription)
     })
+    view.initialAnimation()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -606,8 +610,8 @@ extension ConversationsListViewController {
         self.conversationArray.append(conversation!)
       }
     }
-
-    if (conversationHash.values.filter{ $0.conversationId == conversationId}.isEmpty) {
+    
+    if (conversationHash.values.filter{ $0.conversationId == conversationId}.isEmpty) && (conversationArray.filter{ $0.conversationId == conversationId }.isEmpty) {
       createConversation(conversationId, message: message)
       return
     }

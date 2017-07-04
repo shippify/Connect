@@ -14,7 +14,12 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - Alamofire (4.4.0)
+  - Crashlytics (3.8.4):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
   - JSQSystemSoundPlayer (2.0.1)
+  - lottie-ios (1.5.1)
   - Material (2.6.3):
     - Material/Core (= 2.6.3)
   - Material/Core (2.6.3)
@@ -31,15 +36,23 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - SwiftSpinner (1.2.1)
   - UICKeyChainStore (2.1.1)
+  - Unbox (2.4.0)
   - Whisper (4.0.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.4)
+  - Crashlytics
+  - Fabric
+  - lottie-ios
   - Material (~> 2.0)
   - MonkeyKit
   - MonkeyKitUI (from `~/Documents/git Shippify/Monkey-UI-iOS-master`)
   - RealmSwift (~> 1.1.0)
   - SDWebImage (~> 3.8.1)
+  - SwiftSpinner
+  - Unbox
   - Whisper (from `https://github.com/hyperoslo/Whisper.git`)
 
 EXTERNAL SOURCES:
@@ -55,16 +68,22 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  lottie-ios: f680a7c4cb7a567ecf258fde0f967913aff111b8
   Material: af607a7ec0e9978ef85cf189a3d8ceeeb650400f
   MonkeyKit: aa30b42342130c077f8a69a9a2b79782dc2adefd
   MonkeyKitUI: dd2042fbde1256efa413b3543de85c803d7718ac
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SwiftSpinner: 62a28bbb4035f252a1e91b0e17fc40bdbbfa0aab
   UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
+  Unbox: c8b2ab69d3337597b4a3f47a0538807dc12db670
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
 
-PODFILE CHECKSUM: 984c03cb6d02a6e478cd542bfbe4cd48db46890b
+PODFILE CHECKSUM: e5e0cee1470590c7ef241af6dec93063b336825d
 
 COCOAPODS: 1.2.0

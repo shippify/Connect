@@ -8,6 +8,12 @@ target 'Connect' do
   pod 'Whisper', :git => 'https://github.com/hyperoslo/Whisper.git'
   pod 'MonkeyKit'
   pod 'Material', '~> 2.0'
+  pod 'Alamofire', '~> 4.4'
+  pod 'Unbox'
+  pod 'SwiftSpinner'
+  pod 'lottie-ios'
+  pod 'Fabric'
+  pod 'Crashlytics'
 end
 
 post_install do |installer|

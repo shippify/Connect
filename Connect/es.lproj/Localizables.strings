@@ -1,0 +1,16 @@
+/* 
+  Localizables.strings
+  Connect
+
+  Created by Kevin on 5/5/17.
+  Copyright © 2017 Criptext Inc. All rights reserved.
+*/
+"grouppushtextKey" = "%@ sent a message to '%@'";
+"grouppushprivatetextKey" = "%@ sent a private message to '%@'";
+"grouppushaudioKey" = "%@ sent an audio to '%@'";
+"grouppushprivateaudioKey" = "%@ sent a private audio to '%@'";
+"grouppushimageKey" = "%@ sent an image to '%@'";
+"grouppushprivateimageKey" = "%@ sent a private image to '%@'";
+"grouppushcontactKey" = "%@ sent a contact to '%@'";
+"grouppushfileKey" = "%@ sent a file to '%@'";
+"Email" = "Correo";

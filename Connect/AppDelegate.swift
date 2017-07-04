@@ -9,6 +9,10 @@
 import UIKit
 import RealmSwift
 import Material
+import UserNotifications
+import MonkeyKit
+import Fabric
+import Crashlytics
 
 extension UIStoryboard {
   class func viewController(identifier: String) -> UIViewController {
@@ -20,20 +24,11 @@ extension UIStoryboard {
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
-
-  lazy var rootViewController : RotationNavigationController = {
-    return UIStoryboard.viewController(identifier: "Main") as! RotationNavigationController
-  }()
-  
-  lazy var leftViewController: SlideMenuViewController = {
-    return UIStoryboard.viewController(identifier: "Menu") as! SlideMenuViewController
-  }()
-  
-  
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
     
+    Fabric.with([Crashlytics.self])
     let window = UIWindow(frame: UIScreen.main.bounds)
     let realm = try! Realm()
     let sessionExists = !realm.objects(Session.self).isEmpty
@@ -46,6 +41,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = window
     
     return true
+  }
+  
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    if Monkey.sharedInstance().monkeyId() != "" {
+      Monkey.sharedInstance().pushSubscribeDevice(deviceToken, success: {(task,data) in
+        print("available to receive notification")
+      }) {(task,error) in
+        print(error)
+      }
+    }
   }
   
   func applicationWillResignActive(_ application: UIApplication) {
@@ -64,12 +69,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func applicationDidBecomeActive(_ application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    UIApplication.shared.applicationIconBadgeNumber = 0
   }
   
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
   }
   
+  func registerForPushNotifications() {
+    if #available(iOS 10.0, *) {
+      //you need to import the UserNotifications framework
+      UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+        // Enable or disable features based on authorization.
+      }
+    } else {
+      // Fallback on earlier versions
+      let settings = UIUserNotificationSettings(types: [UIUserNotificationType.badge, UIUserNotificationType.alert, UIUserNotificationType.sound], categories: nil)
+      UIApplication.shared.registerUserNotificationSettings(settings)
+    }
+    UIApplication.shared.registerForRemoteNotifications()
+  }
   
 }
 
