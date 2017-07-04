@@ -134,6 +134,8 @@
 		0AFC148C1EBD264F0074EC38 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				0AFC148F1EBD28950074EC38 /* animation.json */,
+				41FEA8031E5F084A00DF4DA3 /* Info.plist */,
 				0AFC14BF1EBD405C0074EC38 /* Localizable.strings */,
 			);
 			name = "Support Files";
@@ -172,17 +174,15 @@
 			children = (
 				0A8563161EBBF51900516651 /* Connect.entitlements */,
 				0A8563131EBBC00E00516651 /* Utils */,
+				0A8563111EBBA15E00516651 /* API.swift */,
 				0AAAB61A1EB901490086DE5E /* Views */,
 				41FEA82E1E5F132900DF4DA3 /* Model */,
 				41FEA8231E5F0DCA00DF4DA3 /* ViewController */,
+				0AFC148C1EBD264F0074EC38 /* Support Files */,
 				41FEA7F71E5F084A00DF4DA3 /* AppDelegate.swift */,
-				0A8563111EBBA15E00516651 /* API.swift */,
+				41FEA7FE1E5F084A00DF4DA3 /* Assets.xcassets */,
 				0AF8E7471EDC619A00583F63 /* LaunchScreen.storyboard */,
 				0AF8E7491EDC619A00583F63 /* Main.storyboard */,
-				0AFC148C1EBD264F0074EC38 /* Support Files */,
-				0AFC148F1EBD28950074EC38 /* animation.json */,
-				41FEA7FE1E5F084A00DF4DA3 /* Assets.xcassets */,
-				41FEA8031E5F084A00DF4DA3 /* Info.plist */,
 			);
 			path = Connect;
 			sourceTree = "<group>";
@@ -600,7 +600,7 @@
 				INFOPLIST_FILE = Connect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.criptext.Connect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shippify.Connect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "32415633-feb2-4722-8e8d-afc007833139";
 				PROVISIONING_PROFILE_SPECIFIER = "Connect-Dev";
@@ -624,7 +624,7 @@
 				INFOPLIST_FILE = Connect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.criptext.Connect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shippify.Connect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ae776981-0783-494a-ba39-3b35a256e6d4";
 				PROVISIONING_PROFILE_SPECIFIER = "Connect-Ad-Hoc";

@@ -6,11 +6,8 @@
 //  Copyright © 2017 Criptext Inc. All rights reserved.
 //
 
-let APIID = ""
-let APISECRET = ""
-
-let baseURL = ""
-let testingURL = ""
+let APIID = "j2b2toyh0was0jaxilm4e7b9"
+let baseURL = "https://secure.criptext.com"
 
 import Foundation
 import UIKit

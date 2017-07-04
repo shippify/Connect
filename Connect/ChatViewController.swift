@@ -1088,12 +1088,13 @@ extension ChatViewController {
   func createPush(_ messageType:MOKMessageType, fileType:MOKFileType?) -> [String: Any] {
     var locArgs: [String]
     var locKey = "push"
+    let appName = "Shippify"
     
-    if(self.conversation.isGroup()){
-      locArgs = [self.senderDisplayName, self.conversation.info["name"] as! String]
+    if(self.conversation.isGroup()) {
+      locArgs = [appName, self.conversation.info["name"] as! String]
       locKey = "group" + locKey
     }else{
-      locArgs = [self.senderDisplayName]
+      locArgs = [appName]
     }
     
     switch messageType {
