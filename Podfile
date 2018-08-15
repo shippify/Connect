@@ -2,11 +2,11 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'Connect' do
-  pod 'MonkeyKitUI', :path => '~/Documents/git Shippify/Monkey-UI-iOS-master'
-  pod 'RealmSwift', '~> 1.1.0'
+  pod 'MonkeyKitUI', :git => 'https://github.com/Criptext/Monkey-UI-iOS.git', :branch => '7.4.1'
+  pod 'RealmSwift'
   pod 'SDWebImage', '~> 3.8.1'
   pod 'Whisper', :git => 'https://github.com/hyperoslo/Whisper.git'
-  pod 'MonkeyKit'
+  pod 'MonkeyKit', :path => '~/Documents/Git/talktolk-iOS-SDK'
   pod 'Material', '~> 2.0'
   pod 'Alamofire', '~> 4.4'
   pod 'Unbox'

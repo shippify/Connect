@@ -30,7 +30,7 @@ public struct API  {
       "username":username
     ]
     
-    return request(urlString, method: .post, parameters: parameters).authenticate(user: APIID, password: APISECRET).responseData(completionHandler: { (response) in
+    return request(urlString, method: .post, parameters: parameters).authenticate(user: APIID, password: "APISECRET").responseData(completionHandler: { (response) in
       switch response.result {
       case .success( _):
         let result: Either<Void, CriptextAPIError>
@@ -60,7 +60,7 @@ public struct API  {
       "code": code
     ]
     
-    return request(urlString, method: .post, parameters: parameters).authenticate(user: APIID, password: APISECRET).responseData { (response) in
+    return request(urlString, method: .post, parameters: parameters).authenticate(user: APIID, password: "APISECRET").responseData { (response) in
       switch response.result {
       case .success(let data):
         let result: Either<SessionLogin, CriptextAPIError>

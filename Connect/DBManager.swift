@@ -114,7 +114,7 @@ class DBManager {
     
     let condition = "((sender == %@ AND recipient == %@) OR" + (recipient.contains("G:") ? "(sender != %@ AND recipient == %@))" : "(recipient == %@ AND sender == %@))")
     let predicate = NSPredicate(format: "\(condition) AND timestampCreated < \(floor(from?.timestampCreated ?? 0))", sender, recipient, sender, recipient)
-    let results = realm.objects(MessageItem.self).filter(predicate).sorted(byProperty: "timestampCreated", ascending: false)
+    let results = realm.objects(MessageItem.self).filter(predicate).sorted(byKeyPath: "timestampCreated", ascending: false)
     
     var messages = [MOKMessage]()
     
@@ -329,7 +329,7 @@ extension DBManager {
     if let conv = from {
       predicate = NSPredicate(format: "lastModified < \(conv.lastModified)")
     }
-    let results = realm.objects(ConversationItem.self).filter(predicate).sorted(byProperty: "lastModified", ascending: false)
+    let results = realm.objects(ConversationItem.self).filter(predicate).sorted(byKeyPath: "lastModified", ascending: false)
     
     var conversations = [MOKConversation]()
     for (index, conversationItem) in results.enumerated() {

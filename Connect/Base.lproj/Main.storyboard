@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lRY-qb-crj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lRY-qb-crj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Start" id="lRY-qb-crj" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CV0-nf-PTO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -47,14 +47,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wfI-3I-BHT" customClass="ErrorTextField" customModule="Material">
-                                <rect key="frame" x="35" y="263" width="312" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wfI-3I-BHT">
+                                <rect key="frame" x="35" y="206" width="312" height="30"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4We-Un-Zpp">
-                                <rect key="frame" x="128" y="313" width="127" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XHL-Bg-yOr">
+                                <rect key="frame" x="139" y="294" width="97" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4We-Un-Zpp">
+                                <rect key="frame" x="128" y="366" width="127" height="30"/>
                                 <state key="normal" title="Request passcode"/>
                                 <connections>
                                     <action selector="didPressRequestButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dFF-FD-2uz"/>
@@ -67,7 +73,7 @@
                             <constraint firstItem="4We-Un-Zpp" firstAttribute="top" secondItem="wfI-3I-BHT" secondAttribute="bottom" constant="20" id="K38-vF-pu4"/>
                             <constraint firstItem="wfI-3I-BHT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="35" id="Ora-TD-DoI"/>
                             <constraint firstItem="x4J-0H-u9i" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="45" id="P36-Fa-nex"/>
-                            <constraint firstItem="wfI-3I-BHT" firstAttribute="top" secondItem="x4J-0H-u9i" secondAttribute="bottom" constant="107" id="e1w-Af-Jh9"/>
+                            <constraint firstItem="wfI-3I-BHT" firstAttribute="top" secondItem="x4J-0H-u9i" secondAttribute="bottom" constant="50" id="e1w-Af-Jh9"/>
                             <constraint firstItem="x4J-0H-u9i" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="19" id="f8E-8H-c84"/>
                             <constraint firstItem="4We-Un-Zpp" firstAttribute="centerX" secondItem="wfI-3I-BHT" secondAttribute="centerX" id="fdC-ik-dw5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="x4J-0H-u9i" secondAttribute="trailing" constant="183" id="u5n-5Q-loD"/>
@@ -76,6 +82,7 @@
                     <navigationItem key="navigationItem" id="Iko-S5-CuZ"/>
                     <connections>
                         <outlet property="emailTextField" destination="wfI-3I-BHT" id="ifV-0y-Taf"/>
+                        <outlet property="passwordTextField" destination="XHL-Bg-yOr" id="nmB-qO-sKo"/>
                         <segue destination="hpZ-nQ-fzy" kind="show" identifier="toPasswordSegue" id="i2t-m6-7NG"/>
                     </connections>
                 </viewController>
@@ -306,7 +313,7 @@
                 <navigationController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" id="32B-Ta-O2g" customClass="RotationNavigationController" customModule="Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="C37-q7-z8P">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

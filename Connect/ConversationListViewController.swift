@@ -41,8 +41,8 @@ class ConversationsListViewController: UITableViewController {
   let readDove = UIImage(named: "check-blue-icon.png")
   let sentDove = UIImage(named: "check-grey-icon.png")
   
-  let appID = APIID
-  let appSecret = APISECRET
+  let appID = "APIID"
+  let appSecret = "APISECRET"
   var monkeyId = ""
   var name = ""
   
@@ -61,7 +61,7 @@ class ConversationsListViewController: UITableViewController {
     self.tableView.tableFooterView = UIView()
     
     // VIEW - navigation bar
-    self.navigationItem.title = "Chat"
+//    self.navigationItem.title = "Chat"
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: nil, action: nil)
     self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu_azul"), style: .plain, target: self, action: #selector(showSlideMenu))
     
@@ -193,7 +193,7 @@ class ConversationsListViewController: UITableViewController {
                                         failure: {(task, error) in
                                           print(error.localizedDescription)
     })
-    view.initialAnimation()
+//    view.initialAnimation()
   }
   
   override func viewWillAppear(_ animated: Bool) {
